@@ -1,0 +1,2 @@
+Fragen Steff:
+.env ignorieren ausschalten auf das wir alle zugriff auf die datenbank haben wenn okey
