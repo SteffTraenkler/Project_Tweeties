@@ -17,7 +17,7 @@ function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Login loginSuccess={loginSuccess} />} />
       <Route path="/signup" element={<Registration />} />
       {/* <Route path="/verify-email" /> */}
       <Route
