@@ -5,7 +5,7 @@ const { userToUserView } = require("./functions/userToUserView")
 
 async function registerUser({ username, email, password }) {
     const foundUser = await UserDAO.findUserByEmailOrUsernameOrUniqueUsername(username, email)
-
+    console.log(foundUser);
     if (foundUser) {
         const errorMessage = foundUser.username === username
             ? "Username" + username + " already taken!"

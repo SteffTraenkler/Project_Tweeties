@@ -37,10 +37,10 @@ async function findUserByUniqueUsername(uniqueUsername) {
     return foundUser
 }
 
-async function findUserByEmailOrUsernameOrUniqueUsername(username, email, uniqueUsername) {
+async function findUserByEmailOrUsernameOrUniqueUsername(username, email) {
     const db = await getDB()
     const foundUser = await db.collection("users").findOne({
-        $or: [{ username: username }, { email: email }, { uniqueUsername: uniqueUsername }]
+        $or: [{ username: username }, { email: email }]
     })
     return foundUser
 }
