@@ -3,6 +3,7 @@ const cors = require("cors")
 const morgan = require("morgan")
 const cookieSession = require("cookie-session")
 const { userRouter } = require("./routes/user-routes")
+const { postsRouter } = require("./routes/posts-routes")
 
 
 const PORT = process.env.PORT || 9000
@@ -37,6 +38,7 @@ app.get("/", (req, res) => {
 })
 
 //Routen aus dem Routes-Ordner
-app.use("/api/users", userRouter)
+app.use("/api/users", userRouter)  // url ergibt sich aus localhost + diese url + spezifische Route aus userRouter
+app.use("/api/posts", postsRouter) // url ergibt sich aus localhost + diese url + spezifische Route aus postsRouter
 
 app.listen(PORT, () => console.log("Server runs on port", PORT))
