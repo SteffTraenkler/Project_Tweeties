@@ -1,25 +1,34 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
+import AuthRequired from "./Components/AuthRequired";
+import { Home } from "./Pages/Home/Home";
+import Login from "./Pages/Login/Login";
 
 function AppRoutes() {
   const [token, setToken] = useState(null);
   const navigate = useNavigate();
 
-  const loginSuccess = (token) => {
-    setToken(token);
-    navigate("/home");
-  };
+  // const loginSuccess = (token) => {
+  //   setToken(token);
+  //   navigate("/home");
+  // };
 
-  loginSuccess(); //Needs to be deleted
+  // loginSuccess(); //Needs to be deleted
 
   return (
     <Routes>
-      <Route path="/"></Route>
-      <Route path="/signup"></Route>
-      <Route path="/verify-email"></Route>
-      <Route path="/home" token={token}></Route> /Paused needs to be written
-      correct/
+      <Route path="/" element={<Login />} />
+      {/* <Route path="/signup" />
+      <Route path="/verify-email" /> */}
+      <Route
+        path="/home"
+        element={
+          <AuthRequired token={token} setToken={setToken}>
+            <Home token={token} />
+          </AuthRequired>
+        }
+      />
     </Routes>
   );
 }
