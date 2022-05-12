@@ -10,12 +10,10 @@ function AppRoutes() {
   const [token, setToken] = useState(null);
   const navigate = useNavigate();
 
-  // const loginSuccess = (token) => {
-  //   setToken(token);
-  //   navigate("/home");
-  // };
-
-  // loginSuccess(); //Needs to be deleted
+  const loginSuccess = (token) => {
+    setToken(token);
+    navigate("/home");
+  };
 
   return (
     <Routes>
