@@ -25,7 +25,7 @@ export const RegisterForm = () => {
       .then((response) => response.json())
       .then((data) => {
         if (!data.err) {
-          navigate("/verify-email");
+          navigate("/");
           return;
         }
         setError(data.err.message);
