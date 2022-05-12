@@ -1,0 +1,7 @@
+##Fragen
+- refresh-user-token.js:
+    Z. 27 -> return { token } -> warum wird token mit  { } returned? -> damit const token, das ein String ist, als Objeikt returned wird
+
+## eventuelle Features!
+- refresh-user-token:
+    weitere Validierungen wie: geblockt, befreundet, etc.

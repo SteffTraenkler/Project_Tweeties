@@ -2,6 +2,8 @@ const express = require("express")
 const cors = require("cors")
 const morgan = require("morgan")
 const cookieSession = require("cookie-session")
+const { userRouter } = require("./routes/user-routes")
+
 
 const PORT = process.env.PORT || 9000
 const app = express()
@@ -10,6 +12,7 @@ const app = express()
 
 app.use(morgan('dev')) // logger -> loggt Aktivitäten -> Middleware -> ((req,res),next)
 app.use(express.json()) //body parser für json
+app.use(express.static('assets'))
 
 //Running test Route
 
@@ -18,7 +21,6 @@ app.get("/", (req, res) => {
 })
 
 //Routen aus dem Routes-Ordner
-
-//blablubb lol :D
+app.use("/api/users", userRouter)
 
 app.listen(PORT, () => console.log("Server runs on port", PORT))

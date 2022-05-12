@@ -1,4 +1,4 @@
-import { birdie } from "../assets/img/Birdie.png"
+const birdie = "/img/Birdie.png"
 
 function makeUser({
     _id,
