@@ -36,3 +36,39 @@
     transform: rotate(360deg);
   }
 }
+
+/*----Twitter Logo Loading --*/
+
+.twitterLoading {
+  background-color: aquamarine;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.twitterLoadingPic {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+}
+
+.fade-out {
+  animation: fadeOut ease 5s;
+  -webkit-animation: fadeOut ease 5s;
+  -moz-animation: fadeOut ease 5s;
+  -o-animation: fadeOut ease 5s;
+  -ms-animation: fadeOut ease 5s;
+}
+
+@keyframes fadeOut {
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
