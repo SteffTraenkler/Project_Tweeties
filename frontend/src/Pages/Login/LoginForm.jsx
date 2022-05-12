@@ -10,7 +10,7 @@ const LoginForm = (props) => {
   const loginUser = (event) => {
     event.preventDefault();
 
-    fetch(apiBaseUrl + "api/users/login", {
+    fetch(apiBaseUrl + "/api/users/login", {
       method: "Post",
       headers: {
         "Content-Type": "application/json",
