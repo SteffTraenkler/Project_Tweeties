@@ -4,6 +4,7 @@ import "./App.css";
 import AuthRequired from "./Components/AuthRequired";
 import { Home } from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
+import { Registration } from "./Pages/Registration/Registration";
 
 function AppRoutes() {
   const [token, setToken] = useState(null);
@@ -19,8 +20,8 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      {/* <Route path="/signup" />
-      <Route path="/verify-email" /> */}
+      <Route path="/signup" element={<Registration />} />
+      {/* <Route path="/verify-email" /> */}
       <Route
         path="/home"
         element={
