@@ -5,3 +5,6 @@
 ## eventuelle Features!
 - refresh-user-token:
     weitere Validierungen wie: geblockt, befreundet, etc.
+
+-list-main-feed:
+    von allen Posts auf nur die Posts derer, denen man folgt umstellen!
