@@ -28,6 +28,12 @@ function AppRoutes() {
           </AuthRequired>
         }
       />
+      <Route
+        path="/user/:userId"
+        element={
+          <AuthRequired token={token} setToken={setToken}></AuthRequired>
+        }
+      />
     </Routes>
   );
 }
