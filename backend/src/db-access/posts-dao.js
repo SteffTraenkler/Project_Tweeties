@@ -27,12 +27,34 @@ async function insertPost(post) {
 
 async function likePost(postId, userId) {
     const db = await getDB()
-    const insertionResult = await db.collection("posts").updateOne(
-        { _id: new ObjectId(postId) },
-        { $push: { likes: userId } }
-    )
-    return insertionResult
+
+    const checkUser = await db.collection("posts").findOne({ $and: [{ _id: new ObjectId(postId) }, { likes: userId }] })
+    if (checkUser) {
+        const removeResult = await db.collection("posts").update(
+            { _id: new ObjectId(postId) },
+            { $pull: { likes: userId } }
+        )
+        return removeResult
+    }
+
+    if (!checkUser) {
+        const insertionResult = await db.collection("posts").updateOne(
+            { _id: new ObjectId(postId) },
+            { $push: { likes: userId } }
+        )
+        return insertionResult
+    }
 }
+
+
+async function likeArray(postId) {
+    const db = await getDB()
+
+    const resultArray = await db.collection("posts").findOne([{ _id: new ObjectId(postId) }, { likes: 1 }])
+    return resultArray
+}
+
+// zu likeArray: create pipeline to match Ids in likes with userinfo -> note!!: ids in Array MUST be ObjectIds
 
 module.exports = {
     findAllPosts,
