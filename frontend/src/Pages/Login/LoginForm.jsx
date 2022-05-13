@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { apiBaseUrl } from "../../api/api";
+import "../../styles/loginForm.css";
 
 const LoginForm = (props) => {
-  const [username, setUserName] = useState("Shmell");
-  const [password, setPassword] = useState("Hallo123");
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
   const [error, setError] = useState("");
   const loginUser = (event) => {
@@ -45,10 +46,9 @@ const LoginForm = (props) => {
             type="email"
             className=""
             id="floatingInput"
-            placeholder="name@example.com"
+            placeholder="Username or Email"
             autoComplete="off"
           />
-          <label htmlFor="floatingInput">Username or Email</label>
         </div>
         <div>
           <input
@@ -60,18 +60,17 @@ const LoginForm = (props) => {
             placeholder="Password"
             autoComplete="off"
           />
-          <label htmlFor="floatingInput">Username or Email</label>
         </div>
         <button onClick={loginUser} className="" type="submit">
           Anmelden
         </button>
         {error && <p className="text-danger">{error}</p>}
       </form>
-      <small>
-        <Link to="/passwort/reset" className="">
-          Password lost?
-        </Link>
-      </small>
+      <div className="pwLost">
+        <small>
+          <Link to="/passwort/reset">Password lost?</Link>
+        </small>
+      </div>
     </div>
   );
 };
