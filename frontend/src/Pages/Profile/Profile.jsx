@@ -25,6 +25,17 @@ const Profile = (props) => {
       });
   }, [userId, props.token]);
 
-  return <></>;
+  return <>
+      {
+        error
+        ?<h2>{error}</h2>
+        :user
+        ? <div>
+          <div>
+            <img src={user.profilePictrue} alt={"Avatar of " + user.username} />
+          </div>
+        </div>
+      }
+  </>;
 };
 export default Profile;
