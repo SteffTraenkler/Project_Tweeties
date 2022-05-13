@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
-import { CommentIcon } from '../assets/img/CommentIcon.png'
-import { RetweetIcon } from '../assets/img/RetweetIcon.png'
-import { LikeIcon } from '../assets/img/LikeIcon.png'
-import { ShareIcon } from '../assets/img/SahreIcon.png'
+// import { CommentIcon } from '../assets/img/CommentIcon.png'
+// import { RetweetIcon } from '../assets/img/RetweetIcon.png'
+// import { LikeIcon } from '../assets/img/LikeIcon.png'
+// import { ShareIcon } from '../assets/img/SahreIcon.png'
+
 
 export default function Post(props) {
 
@@ -31,27 +32,14 @@ export default function Post(props) {
                 <p>postedAt: Let there be dates which programmers hate to implement! (┛❍ᴥ❍)┛彡┻━┻</p>
             </div>
             <hr />
-            {
-                (props.post.likes || props.post.retweets || props.post.quotedTweets)
-                    ?
-                    <div className='countPostInteraktionsDiv'>
-                        {/* onclick on the p tags with each a function!! */}
-                        <p>{props.post.retweets.length} Retweets</p>
-                        <p>{props.post.retweets.length} Zitierte Tweets</p>
-                        <p>{props.post.likes.length} Likes</p>
-                    </div>
-                    :
-                    ""
-            }
 
-            <hr />
 
-            <div className='iconInteractionBarDiv'>
+            {/* <div className='iconInteractionBarDiv'>
                 <div><img src={CommentIcon} alt="Link to comment this tweet" /></div>
                 <div><img src={RetweetIcon} alt="Link to Retweet this Tweet" /></div>
                 <div><img src={LikeIcon} alt="Link to like thi post / Tweet" /></div>
                 <div><img src={ShareIcon} alt="Link to share this post / Tweet" /></div>
-            </div>
+            </div> */}
         </div >
     )
 }
