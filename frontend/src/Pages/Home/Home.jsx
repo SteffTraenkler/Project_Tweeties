@@ -34,8 +34,6 @@ export const Home = (props) => {
         {/* Post add- Component */}
         {/* feed component */}
       </article>
-
-
     </div>
   );
 };
