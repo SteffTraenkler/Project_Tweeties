@@ -20,7 +20,9 @@
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
     "live-server": "^1.2.2",
-    "mongodb": "^4.5.0",
-    "morgan": "^1.10.0"
+    "mongodb": "^4.6.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.16",
+    "react-loader-spinner": "^6.0.0-0"
   }
 }

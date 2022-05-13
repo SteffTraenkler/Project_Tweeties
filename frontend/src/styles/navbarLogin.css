@@ -1,0 +1,27 @@
+.birdieLogin {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+}
+.birdieLogin img {
+  grid-column: 2/3;
+  justify-self: center;
+}
+.birdie {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  border-bottom: 1px lightgray solid;
+}
+.birdie .bird {
+  grid-column: 2/3;
+  justify-self: center;
+}
+.bird img {
+  width: 50%;
+  text-align: center;
+  padding-top: 25%;
+}
+.backBtn {
+  grid-column: 1/2;
+  justify-self: start;
+  padding: 25% 0 0 10%;
+}
