@@ -25,6 +25,17 @@ export const Home = (props) => {
   return (
     <div>
       <h1>Ich bin Home!"</h1>
+      <aside>
+        {/* <p>
+        Modal-Fenster Component
+        </p> */}
+      </aside>
+      <article>
+        {/* Post add- Component */}
+        {/* feed component */}
+      </article>
+
+
     </div>
   );
 };

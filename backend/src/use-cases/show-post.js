@@ -27,3 +27,7 @@ async function showPost({ postId }) {
         }
     }
 }
+
+module.exports = {
+    showPost
+}
