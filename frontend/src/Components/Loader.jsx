@@ -6,7 +6,7 @@ import "../App.css";
 const Loader = () => {
   return (
     <div className="twitterLoading fade-out">
-      <TailSpin height="300" width="300" color="blue" ariaLabel="Loading" />
+      <TailSpin height="300" width="300" color="#1da1f2" ariaLabel="Loading" />
       <img className="twitterLoadingPic" src={birdLogo} alt="picturePic" />
     </div>
   );

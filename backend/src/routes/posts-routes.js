@@ -9,10 +9,11 @@ const { imageBufferToBase64 } = require("../utils/hash")
 const postsRouter = express.Router()
 const pictureUploardMiddleware = multer().single("picture")
 
-postsRouter.get("/feed", doAuthMiddleware, async (_, res) => {
+postsRouter.get("/feed", doAuthMiddleware, async (req, res) => {
 
     try {
         const result = await PostService.listMainFeed()
+        result.map(item => item.likedByUser = item.likes.includes(req.userClaims.sub))
         res.status(200).json(result)
 
     } catch (err) {
