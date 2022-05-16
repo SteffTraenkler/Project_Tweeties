@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiBaseUrl } from "../../api/api";
+import "../../styles/loginForm.css";
 
 export const RegisterForm = () => {
   const [email, setEmail] = useState("");
@@ -45,7 +46,6 @@ export const RegisterForm = () => {
             placeholder="name@example.com"
             autoComplete="off"
           />
-          <label htmlFor="floatingInput">Email</label>
         </div>
         <div>
           <input
@@ -57,7 +57,6 @@ export const RegisterForm = () => {
             placeholder="Your Full Name"
             autoComplete="off"
           />
-          <label htmlFor="floatingInput">Vollständiger Name</label>
         </div>
         <div>
           <input
@@ -69,7 +68,6 @@ export const RegisterForm = () => {
             placeholder="Your Username"
             autoComplete="off"
           />
-          <label htmlFor="floatingInput">Benutername</label>
         </div>
         <div>
           <input
@@ -81,7 +79,6 @@ export const RegisterForm = () => {
             placeholder="Your Password"
             autoComplete="off"
           />
-          <label htmlFor="floatingInput">Passwort</label>
         </div>
         <button onClick={doRegistration} className="" type="submit">
           Weiter

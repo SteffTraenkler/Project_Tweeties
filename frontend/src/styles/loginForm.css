@@ -26,7 +26,8 @@ input {
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"] {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
@@ -48,9 +49,24 @@ button[type="submit"] {
   border-radius: 5px;
   border: 1px solid #1da1f2;
 }
+
 button[type="submit"]:hover {
   background: white;
   color: #1da1f2;
+  border: 1px solid #1da1f2;
+}
+
+.signUp {
+  text-align: center;
+  padding-top: 2%;
+}
+button[type="button"] {
+  width: 55%;
+  background: #1da1f2;
+  padding: 9px;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
   border: 1px solid #1da1f2;
 }
 
@@ -80,8 +96,16 @@ h1 {
   border: 1px solid #1da1f2;
 }
 
+/* Login terms */
 .terms {
   width: 75%;
   margin: 0 auto;
   padding-top: 10%;
+}
+
+/* Register p Tag */
+.smallTxt {
+  text-align: center;
+  padding-top: 5%;
+  font-size: 3vw;
 }
