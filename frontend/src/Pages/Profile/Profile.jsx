@@ -1,5 +1,5 @@
 const { useState, useEffect } = require("react");
-const { useParams } = require("react-router-dom");
+const { useParams, Link } = require("react-router-dom");
 const { apiBaseUrl } = require("../../api/api");
 
 const Profile = (props) => {
@@ -25,17 +25,44 @@ const Profile = (props) => {
       });
   }, [userId, props.token]);
 
-  return <>
-      {
-        error
-        ?<h2>{error}</h2>
-        :user
-        ? <div>
+  return (
+    <div token={props.token}>
+      {error ? (
+        <h2>{error}</h2>
+      ) : user ? (
+        <div>
           <div>
-            <img src={user.profilePictrue} alt={"Avatar of " + user.username} />
+            <img src={user.profilePicture} alt={"Avatar of " + user.username} />
           </div>
+
+          <div>
+            <div>
+              <h1>{user.username}</h1>
+              <h2>@{user.uniqueUsername}</h2>
+              <button>Profile Bearbeiten</button>
+            </div>
+            <h3>{user.posts.length} Posts</h3>
+            <h3>{user.email}</h3>
+          </div>
+          <hr />
+
+          <div>
+            {user.posts.map((post, index) => (
+              <Link to={"/post/" + post._id} key={index}>
+                <img
+                  src={post.picture}
+                  alt={"Post " + index + " of " + user.username}
+                />
+                <p>{user.postText}</p>
+              </Link>
+            ))}
+          </div>
+          <Link to={"/home"}>Back to Home</Link>
         </div>
-      }
-  </>;
+      ) : (
+        <h2>Loading ...</h2>
+      )}
+    </div>
+  );
 };
 export default Profile;

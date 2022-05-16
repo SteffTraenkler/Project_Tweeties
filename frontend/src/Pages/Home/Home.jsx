@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export const Home = (props) => {
   const [posts, setPosts] = useState([]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(apiBaseUrl + "/api/posts/feed", {
@@ -26,7 +26,7 @@ export const Home = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const createNewTweet = () => navigate("/addPost")
+  const createNewTweet = () => navigate("/addPost");
 
   return (
     <div>
@@ -38,15 +38,18 @@ export const Home = (props) => {
       </aside> */}
       <article>
         {/* Post add- Component */}
-        {posts.length === 0 ?
+        {posts.length === 0 ? (
           <h2>Sorry, your feed is currently empty... Add your first post!</h2>
-          : <PostList posts={posts} token={props.token} />}
-
+        ) : (
+          <PostList posts={posts} token={props.token} />
+        )}
       </article>
       <div className="addTweet-btn" onClick={createNewTweet}>
         <img src="" alt="" />
         <p>add Tweet</p>
       </div>
-    </div >
+    </div>
   );
 };
+
+export default Home;

@@ -3,6 +3,7 @@ const { loginUser } = require("./login-user");
 const { refreshUserToken } = require("./refresh-user-token");
 const { listAllUsers } = require("./list-all-users");
 const { showProfileInfo } = require("./show-profile");
+const { showUser } = require("./show-user");
 
 const { addPost } = require("./add-post");
 const { likePost } = require("./like-post");
@@ -15,6 +16,7 @@ const UserService = {
   refreshUserToken,
   listAllUsers,
   showProfileInfo,
+  showUser,
 };
 
 const PostService = {
