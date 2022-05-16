@@ -40,11 +40,15 @@ postsRouter.post("/add",
 
         try {
 
-            const pictureBase64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
+            const pictureBase64 = () =>
+                req.file ?
+                    imageBufferToBase64(req.file.buffer, req.file.mimetype)
+                    : undefined
+
 
             const result = await PostService.addPost({
                 postText: req.body.postText,
-                picture: pictureBase64,
+                picture: pictureBase64(),
                 postedBy: req.userClaims.sub  //token findet über subject den user
             })
 
@@ -52,6 +56,7 @@ postsRouter.post("/add",
             res.status(201).json(result)
 
         } catch (err) {
+            console.log(err);
             res.status(500).json({ err: { message: err ? err.message : "Unknown error while adding a new post." } })
         }
     }
