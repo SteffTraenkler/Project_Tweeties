@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { NavbarLogin } from "../../Components/NavbarLogin";
 import { RegisterForm } from "./RegisterForm";
+import "../../styles/loginForm.css";
 
 export const Registration = () => {
   return (
@@ -8,11 +9,14 @@ export const Registration = () => {
       <NavbarLogin className="show" />
       <h1>Create your account</h1>
       <RegisterForm />
-      <Link to="/">
-        <button className="" type="btn">
-          Sign Up
-        </button>
-      </Link>
+      <p className="smallTxt">Allready have an Account?</p>
+      <div className="signUp">
+        <Link to="/">
+          <button className="" type="button">
+            Sign Up
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
