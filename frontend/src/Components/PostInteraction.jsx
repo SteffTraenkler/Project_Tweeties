@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import { CommentIcon } from '../assets/img/CommentIcon.png'
-import { RetweetIcon } from '../assets/img/RetweetIcon.png'
-import { LikeIcon } from '../assets/img/LikeIcon.png'
-import { ShareIcon } from '../assets/img/SahreIcon.png'
+import CommentIcon from '../assets/icons/tweeties/CommentIcon.png'
+import RetweetIcon from '../assets/icons/tweeties/RetweetIcon.png'
+import LikeIcon from '../assets/icons/tweeties/LikeIcon.png'
+import ShareIcon from '../assets/icons/tweeties/ShareIcon.png'
 
 export default function PostInteraction(props) {
 
