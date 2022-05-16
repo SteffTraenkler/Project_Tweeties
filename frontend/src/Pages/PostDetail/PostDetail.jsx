@@ -44,20 +44,25 @@ export default function (props) {
                                     ?
                                     <div className='countPostInteraktionsDiv'>
                                         {/* onclick on the p tags with each a function!! */}
-                                        <p>{props.post.retweets.length} Retweets</p>
-                                        <p>{props.post.retweets.length} Zitierte Tweets</p>
-                                        <p>{props.post.likes.length} Likes</p>
+                                        {props.post.retweets.length > 0 ? <p>{props.post.retweets.length} Retweets</p> : null}
+                                        {props.post.quotedTweets > 0 ? < p > {props.post.retweets.length} Zitierte Tweets</p> : null}
+                                        {props.post.likes.length > 0 ? <p>{props.post.likes.length} Likes</p> : null}
                                     </div>
                                     :
                                     ""
                             }
                             <hr />
-                            <PostInteraction post={post} token={props.token} />
+                            <div className='iconInteractionBarDiv'>
+                                <CommentInteraction post={post} token={props.token} />
+                                <RetweetInteraction post={post} token={props.token} />
+                                <LikeInteraction post={post} token={props.token} />
+                                <ShareInteraction post={post} token={props.token} />
+                            </div>
                         </div>
 
                         : <div className="pagePicLoader"> <img className="twitterLoadingPic" src={birdLogo} alt="birdLogo" /> </div>
             }
-        </div>
+        </div >
 
     )
 }
