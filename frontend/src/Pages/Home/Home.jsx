@@ -13,6 +13,7 @@ export const Home = (props) => {
 
   const navigate = useNavigate()
 
+
   useEffect(() => {
     console.log("useeffect rendert");
     fetch(apiBaseUrl + "/api/posts/feed", {
@@ -42,7 +43,7 @@ export const Home = (props) => {
       </aside> */}
       <article className="newPost">
         {/* Post add- Component */}
-  
+
         {posts.length === 0 ? (
           <h2 className="noPost">
             Sorry 😧, your feed is currently empty... Add your first post!
@@ -67,3 +68,5 @@ export const Home = (props) => {
     </div>
   );
 };
+
+export default Home;

@@ -5,6 +5,7 @@ import AuthRequired from "./Components/AuthRequired";
 import AddTweet from "./Pages/AddTweet/AddTweet";
 import { Home } from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
+import Profile from "./Pages/Profile/Profile";
 import { Registration } from "./Pages/Registration/Registration";
 
 function AppRoutes() {
@@ -32,14 +33,19 @@ function AppRoutes() {
       <Route
         path="/user/:userId"
         element={
-          <AuthRequired token={token} setToken={setToken}></AuthRequired>
+          <AuthRequired token={token} setToken={setToken}>
+            <Profile token={token} />
+          </AuthRequired>
         }
       />
-      <Route path="/addPost" element={
-        <AuthRequired token={token} setToken={setToken}>
-          <AddTweet token={token} />
-        </AuthRequired>
-      } />
+      <Route
+        path="/addPost"
+        element={
+          <AuthRequired token={token} setToken={setToken}>
+            <AddTweet token={token} />
+          </AuthRequired>
+        }
+      />
     </Routes>
   );
 }
