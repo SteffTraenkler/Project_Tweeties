@@ -23,10 +23,10 @@ userRouter.get("/all", async (_, res) => {
 });
 
 // Profil Info & User ProfileID
-userRouter.get("/myProfileInfo", async (req, res) => {
+userRouter.get("/myProfileInfo", doAuthMiddleware, async (req, res) => {
   try {
-    const userId = req.userClaims.sub; // an den token wird erkannt, um welchen user es sich handelt
-    const allUsers = await UserService.showProfileInfo({ userId });
+    const userId = req.userClaims.sub // an den token wird erkannt, um welchen user es sich handelt
+    const allUsers = await UserService.showProfileInfo({ userId })
     res.status(200).json(allUsers); // 200 Means Anfrage is Erfolgreich verlaufen
   } catch (error) {
     console.log(error);

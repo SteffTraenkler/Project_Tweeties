@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import AuthRequired from "./Components/AuthRequired";
+import AddTweet from "./Pages/AddTweet/AddTweet";
 import { Home } from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import { Registration } from "./Pages/Registration/Registration";
@@ -34,6 +35,11 @@ function AppRoutes() {
           <AuthRequired token={token} setToken={setToken}></AuthRequired>
         }
       />
+      <Route path="/addPost" element={
+        <AuthRequired token={token} setToken={setToken}>
+          <AddTweet token={token} />
+        </AuthRequired>
+      } />
     </Routes>
   );
 }

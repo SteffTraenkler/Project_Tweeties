@@ -6,9 +6,6 @@ const { doAuthMiddleware } = require("../auth/doAuthMiddleware")
 const { PostService } = require("../use-cases")
 const { imageBufferToBase64 } = require("../utils/hash")
 
-
-
-
 const postsRouter = express.Router()
 const pictureUploardMiddleware = multer().single("picture")
 
@@ -42,12 +39,15 @@ postsRouter.post("/add",
     async (req, res) => {
 
         try {
-            const pictureBase64 = imageBufferToBase64(req.file.buffer, res.file.mimetype)
+
+            const pictureBase64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
+
             const result = await PostService.addPost({
                 postText: req.body.postText,
                 picture: pictureBase64,
                 postedBy: req.userClaims.sub  //token findet über subject den user
             })
+
 
             res.status(201).json(result)
 
