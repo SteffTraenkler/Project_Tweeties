@@ -1,0 +1,70 @@
+textarea {
+  resize: none;
+  outline-color: #1da1f2;
+  border-radius: 5px;
+}
+textarea:valid {
+  border: 1px solid black;
+}
+
+.prevPicContainer {
+  /* padding-top: 10%; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* margin: 50px; */
+}
+
+.prevPic {
+  width: 100%;
+}
+
+.posRel {
+  position: relative;
+}
+
+.delete-pic-from-post {
+  position: absolute;
+  text-align: center;
+  right: 10px;
+  top: 10px;
+  color: white;
+  opacity: 0.8;
+  border: 1px solid black;
+  background-color: black;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+}
+.x {
+  padding-top: 5px;
+}
+.dFlex {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0 5% 0 5%;
+}
+.closePost {
+  color: #1da1f2;
+}
+#tweet {
+  border: 1px solid #1da1f2;
+  background-color: #1da1f2;
+  color: white;
+  border-radius: 17px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+.cameraIconDiv {
+  border: 1px solid #e1e8ed;
+  width: 50px;
+
+  padding: 5px;
+  border-radius: 10px;
+  text-align: center;
+  color: grey;
+}
+.unvisible {
+  visibility: hidden;
+}
