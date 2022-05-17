@@ -11,7 +11,7 @@ export default function Post(props) {
         <Link to={"/user/" + props.post.postedBy.username}>
           <img
             src={props.post.postedBy.profilePicture}
-            // alt={"Avatar of " + props.post.postedBy.username}
+          /*alt={"Avatar of " + props.post.postedBy.username}*/
           />
         </Link>
       </div>

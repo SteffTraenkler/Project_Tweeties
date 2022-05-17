@@ -13,6 +13,9 @@ async function findAllPostsOfUser(userId) {
     return allPosts
 }
 
+
+///dupliziere findAllPostsOfUser -> nutze aggregate mit map und filter, um die Posts, in denen in den Likes die UserId steckt auszugeben. Teste in der MongoDB Shell die Kombination aus find und aggregate (findAllPostsOfUser -> find({postedBy: userId} + aggregate: map posts -> filter posts.retweets === userId)) <- zusammen, damit die Posts in Reihenfolge angezeigt werden und nicht RTs und eigene Posts einzeln.
+
 async function findPostById(postId) {
     const db = await getDB()
     const foundPost = await db.collection("posts").findOne({ _id: new ObjectId(postId) })
