@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { apiBaseUrl } from "../../api/api";
 import Post from "../../Components/Post";
+
 import {
   CommentInteraction,
   LikeInteraction,
@@ -13,6 +14,7 @@ import birdLogo from "../../assets/img/Birdie.png";
 export default function PostDetail(props) {
   const { postId } = useParams();
   const [post, setPost] = useState();
+
 
   const [interactionChange, setInteractionChange] = useState(false);
 
