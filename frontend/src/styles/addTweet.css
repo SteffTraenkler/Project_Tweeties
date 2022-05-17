@@ -14,6 +14,21 @@ textarea:valid {
   justify-content: center;
   /* margin: 50px; */
 }
+.divTweetProfilePic {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 20px 0 0 10px;
+}
+
+.divTweetProfilePic img {
+  width: auto;
+  height: 100%;
+  margin-left: -35px;
+}
 
 .prevPic {
   width: 100%;

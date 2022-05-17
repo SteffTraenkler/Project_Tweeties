@@ -12,10 +12,10 @@ export default function Post(props) {
     <div className="post">
       <div className="userPic">
         <Link to={"/user/" + props.post.postedBy.username}>
-        <div className="borderAvatar">
-          <img src={props.post.postedBy.profilePicture} alt="alttext" />
-        </div>
-    </Link>
+          <div className="borderAvatar">
+            <img src={props.post.postedBy.profilePicture} alt="alttext" />
+          </div>
+        </Link>
       </div>
       <div className="postBody">
         <div className="postHeader">
@@ -29,7 +29,7 @@ export default function Post(props) {
           <p>{props.post.postText ? props.post.postText : ""}</p>
 
           {props.post.picture ? (
-            <div className="box imgBox">
+            <div className="box">
               <img
                 src={props.post.picture}
                 alt={"Image Post by User " + props.post.postedBy.username}
