@@ -1,3 +1,5 @@
+import PostList from "../../Components/PostList";
+
 const { useState, useEffect } = require("react");
 const { useParams, Link } = require("react-router-dom");
 const { apiBaseUrl } = require("../../api/api");
@@ -7,6 +9,8 @@ const Profile = (props) => {
 
   const [user, setUser] = useState();
   const [error, setError] = useState("");
+
+  const [interactionChange, setInteractionChange] = useState(false);
 
   useEffect(() => {
     fetch(apiBaseUrl + "/api/users/profile/" + userId, {
@@ -45,18 +49,26 @@ const Profile = (props) => {
             <h3>{user.email}</h3>
           </div>
           <hr />
-
-          <div>
+          <PostList
+            posts={user.posts}
+            token={props.token}
+            setInteractionChange={setInteractionChange}
+            interactionChange={interactionChange}
+          />
+          {/* <div>
             {user.posts.map((post, index) => (
+              
               <Link to={"/post/" + post._id} key={index}>
                 <img
                   src={post.picture}
                   alt={"Post " + index + " of " + user.username}
                 />
-                <p>{user.postText}</p>
+                <span>{new Date(post.postedAt).toLocaleDateString()}</span>
+                <p>{post.postText}</p>
               </Link>
             ))}
-          </div>
+          </div> */}
+
           <Link to={"/home"}>Back to Home</Link>
         </div>
       ) : (
