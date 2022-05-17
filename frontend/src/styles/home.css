@@ -1,8 +1,12 @@
+* {
+  box-sizing: border-box;
+}
+/* Nur wenn keine Post angezeigt werden */
 .noPost {
   margin: 0 auto;
   width: 70%;
 }
-
+/* Blaue Feder um einen Post zu erstellen */
 .addTweet-btn {
   color: black;
   background-color: #1da1f2;
@@ -17,24 +21,32 @@
 .posRela {
   position: relative;
 }
+/* Ganzer Post Bereich */
 .post {
   display: flex;
   align-items: flex-start;
-  border-bottom: 1px solid #e6ecf0;
-  border-top: 1px solid #e6ecf0;
+  /* border-bottom: 1px solid #e6ecf0; */
+  border-top: 1px solid gray;
   padding-bottom: 10px;
   cursor: pointer;
 }
-.postBody {
+/* Avatar */
+.userPic {
+  padding-right: 10px;
+  padding-top: 20px;
+  padding-left: 5px;
 }
-/* .PostDiv img {
-  width: 50%;
-} */
-.postBody img {
-  border-radius: 20px;
-
-  margin-top: 5px;
+.borderAvatar {
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 5px;
+  width: 100%;
 }
+.borderAvatar img {
+  width: 10vw;
+  height: auto;
+}
+/* Oberer Bereich im Post mit Username etc. */
 .postHeader {
   display: flex;
   gap: 10px;
@@ -50,17 +62,40 @@
   font-size: 0.6em;
   color: black;
 }
-
+/* Usernachrricht */
+.postBody p {
+  margin: 0;
+  padding-bottom: 1%;
+}
 .PostDiv p {
   font-weight: small;
   font-size: 0.7em;
 }
-.PostDiv img {
-  width: 355px;
-  height: 355px;
+/* Userpost Bild */
+.box {
+  align-items: stretch;
+  border: 0 solid black;
+  box-sizing: border-box;
+  /* margin-left: 50px; */
+  margin-right: 50px;
 }
+.box img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.imgBox img {
+  object-fit: fill;
+  border-radius: 20px;
+}
+/* Iconbar unten Like etc. */
 .iconInteractionBarDiv {
   display: flex;
-  justify-content: space-between;
-  padding: 20px 0;
+  justify-content: center;
+  gap: 10%;
+  padding: 5px 0;
+  padding-right: 20%;
+}
+.iconInteractionBarDiv img {
+  width: 80%;
 }

@@ -3,17 +3,19 @@ import { Link } from "react-router-dom";
 // import { RetweetIcon } from '../assets/img/RetweetIcon.png'
 // import { LikeIcon } from '../assets/img/LikeIcon.png'
 // import { ShareIcon } from '../assets/img/SahreIcon.png'
+import birdie from "../assets/img/Birdie.png";
 
 export default function Post(props) {
+  //alttext={"Avatar of " + props.post.postedBy.username}
+
   return (
     <div className="post">
       <div className="userPic">
         <Link to={"/user/" + props.post.postedBy.username}>
-          <img
-            src={props.post.postedBy.profilePicture}
-            // alt={"Avatar of " + props.post.postedBy.username}
-          />
-        </Link>
+        <div className="borderAvatar">
+          <img src={props.post.postedBy.profilePicture} alt="alttext" />
+        </div>
+    </Link>
       </div>
       <div className="postBody">
         <div className="postHeader">
@@ -21,16 +23,18 @@ export default function Post(props) {
             <h3>{props.post.postedBy.username}</h3>
             <p>{props.post.postedBy.uniqueUsername}</p>
           </Link>
-          <p>postedAt: 14:00</p>
+          <p>{new Date(props.post.postedAt).toLocaleDateString()}</p>
         </div>
         <div className="PostDiv">
           <p>{props.post.postText ? props.post.postText : ""}</p>
 
           {props.post.picture ? (
-            <img
-              src={props.post.picture}
-              alt={"Image Post by User " + props.post.postedBy.username}
-            />
+            <div className="box imgBox">
+              <img
+                src={props.post.picture}
+                alt={"Image Post by User " + props.post.postedBy.username}
+              />
+            </div>
           ) : (
             ""
           )}
