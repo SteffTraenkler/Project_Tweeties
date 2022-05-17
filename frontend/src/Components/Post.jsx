@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 // import { RetweetIcon } from '../assets/img/RetweetIcon.png'
 // import { LikeIcon } from '../assets/img/LikeIcon.png'
 // import { ShareIcon } from '../assets/img/SahreIcon.png'
+import birdie from "../assets/img/Birdie.png";
 
 export default function Post(props) {
   //alttext={"Avatar of " + props.post.postedBy.username}
@@ -11,8 +12,10 @@ export default function Post(props) {
     <div className="post">
       <div className="userPic">
         <Link to={"/user/" + props.post.postedBy.username}>
+        <div className="borderAvatar">
           <img src={props.post.postedBy.profilePicture} alt="alttext" />
-        </Link>
+        </div>
+    </Link>
       </div>
       <div className="postBody">
         <div className="postHeader">
@@ -26,10 +29,12 @@ export default function Post(props) {
           <p>{props.post.postText ? props.post.postText : ""}</p>
 
           {props.post.picture ? (
-            <img
-              src={props.post.picture}
-              alt={"Image Post by User " + props.post.postedBy.username}
-            />
+            <div className="box imgBox">
+              <img
+                src={props.post.picture}
+                alt={"Image Post by User " + props.post.postedBy.username}
+              />
+            </div>
           ) : (
             ""
           )}
