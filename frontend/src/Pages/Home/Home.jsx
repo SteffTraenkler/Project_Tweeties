@@ -9,9 +9,13 @@ import "../../styles/home.css";
 export const Home = (props) => {
   const [posts, setPosts] = useState([]);
 
-  const navigate = useNavigate();
+  const [interactionChange, setInteractionChange] = useState(false)
+
+  const navigate = useNavigate()
+
 
   useEffect(() => {
+    console.log("useeffect rendert");
     fetch(apiBaseUrl + "/api/posts/feed", {
       headers: {
         token: "JWT " + props.token,
@@ -26,7 +30,7 @@ export const Home = (props) => {
         }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [interactionChange]);
 
   const createNewTweet = () => navigate("/addPost");
 
@@ -39,12 +43,13 @@ export const Home = (props) => {
       </aside> */}
       <article className="newPost">
         {/* Post add- Component */}
+
         {posts.length === 0 ? (
           <h2 className="noPost">
             Sorry 😧, your feed is currently empty... Add your first post!
           </h2>
         ) : (
-          <PostList posts={posts} token={props.token} />
+          <PostList posts={posts} token={props.token} setInteractionChange={setInteractionChange} interactionChange={interactionChange}  />
         )}
       </article>
       <div className="posRela">
@@ -63,3 +68,5 @@ export const Home = (props) => {
     </div>
   );
 };
+
+export default Home;
