@@ -1,7 +1,7 @@
 const { UserDAO } = require("../db-access");
 const { makeUser } = require("../domain/User");
 
-async function verifyUserEmail({ email, sexDigitCode }) {
+async function verifyUserEmail({ email, sixDigitCode }) {
     const foundUser = await UserDAO.findUserByEmail(email)
     if (!foundUser) {
         throw new Error("There was a problem verifiying this 6-digit-code.")
@@ -9,7 +9,7 @@ async function verifyUserEmail({ email, sexDigitCode }) {
 
     const user = makeUser(foundUser)
 
-    const sixDigitCodeIsOkay = user.sixDigitVerificationCode == sexDigitCode
+    const sixDigitCodeIsOkay = user.sixDigitVerificationCode === sixDigitCode
     if (!sixDigitCodeIsOkay) {
         throw new Error("Threre was a problem verifiying this 6-digit-code.")
     }

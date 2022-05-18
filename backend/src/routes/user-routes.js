@@ -129,7 +129,8 @@ userRouter.post("/verifyEmail",
     try {
       const email = req.body.email
       const sixDigitCode = req.body.sixDigitCode
-      const result = await UserService.verifyUserEmail
+      const result = await UserService.verifyUserEmail({ email, sixDigitCode })
+      res.status(200).json(result)
     } catch (error) {
       console.log(err);
       res.status(500).json({ err: { message: err ? err.message : "Unknown error while verifying your email."}})

@@ -53,7 +53,7 @@ const VerifyEmailForm = (props) => {
                         <label htmlFor="floatingInput">Verification Code</label>
                     </div>
                     <button onClick={verifyAccount} type="submit">Account Verifizieren</button>
-                    {error && <p>{error}</p>}
+                    {error && <p>Das hier ist ein error {error}</p>}
                 </form>}
         </div>
     )
