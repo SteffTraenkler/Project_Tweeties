@@ -13,6 +13,25 @@ async function findAllPostsOfUser(userId) {
     return allPosts
 }
 
+async function findAllPostsOfUserAndRts(userId) {
+    const db = await getDB()
+    const allPosts = await db.collection("posts")
+        .find({
+            $or: [
+                { postedBy: userId },
+                {
+                    retweets: userId //{$elemMatch:userId} -> für Objekt
+                }]
+        })
+        .sort({ postedAt: -1 }).toArray()
+    return allPosts
+}
+
+async function findAllLikedPostsOfUser(userId) {
+    const db = await getDB()
+    const allLikedPosts = await db.collection("posts")
+        .find({ likes: userId }).sort({ postedAt: -1 }).toArray()
+}
 
 ///dupliziere findAllPostsOfUser -> nutze aggregate mit map und filter, um die Posts, in denen in den Likes die UserId steckt auszugeben. Teste in der MongoDB Shell die Kombination aus find und aggregate (findAllPostsOfUser -> find({postedBy: userId} + aggregate: map posts -> filter posts.retweets === userId)) <- zusammen, damit die Posts in Reihenfolge angezeigt werden und nicht RTs und eigene Posts einzeln.
 
@@ -35,7 +54,7 @@ async function likePost(postId, userId) {
     if (checkUser) {
         const removeResult = await db.collection("posts").update(
             { _id: new ObjectId(postId) },
-            { $pull: { likes: userId } }
+            { $pull: { likes: userId } } //elemMatch -> bei Objekt  -> funktioniert nicht lol. Kann keine ID aus einem Objekt lesen und beide rausnehmen
         )
         return removeResult
     }
@@ -49,6 +68,27 @@ async function likePost(postId, userId) {
     }
 }
 
+
+async function retweetPost(postId, userId) {
+    const db = await getDB()
+
+    const checkUser = await db.collection("posts").findOne({ $and: [{ _id: new ObjectId(postId) }, { retweets: userId }] })
+    if (checkUser) {
+        const removeResult = await db.collection("posts").update(
+            { _id: new ObjectId(postId) },
+            { $pull: { retweets: userId } } //elemMatch -> bei Objekt  -> funktioniert nicht lol. Kann keine ID aus einem Objekt lesen und beide rausnehmen
+        )
+        return removeResult
+    }
+
+    if (!checkUser) {
+        const insertionResult = await db.collection("posts").updateOne(
+            { _id: new ObjectId(postId) },
+            { $push: { retweets: userId } }
+        )
+        return insertionResult
+    }
+}
 
 async function likeArray(postId) {
     const db = await getDB()
@@ -64,6 +104,9 @@ module.exports = {
     findAllPostsOfUser,
     findPostById,
     insertPost,
-    likePost
+    likePost,
+    findAllPostsOfUserAndRts,
+    retweetPost,
+    findAllLikedPostsOfUser
 }
 

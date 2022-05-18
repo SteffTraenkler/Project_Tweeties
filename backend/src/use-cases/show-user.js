@@ -11,7 +11,11 @@ async function showUser({ username }) {
   const user = makeUser(foundUser);
   const userView = userToUserView(user);
 
-  const posts = await PostDAO.findAllPostsOfUser(user._id.toString());
+  const posts = await PostDAO.findAllPostsOfUserAndRts(user._id.toString());
+  posts.map(item => {
+    item.likedByUser = item.likes.includes(user._id.toString()),
+      item.rtByUser = item.retweets.includes(user._id.toString())
+  })
 
   return { ...userView, posts };
 }

@@ -27,7 +27,18 @@ const Profile = (props) => {
         console.log(data);
         setUser(data);
       });
-  }, [userId, props.token]);
+  }, [userId, props.token, interactionChange]);
+
+  console.log("user", user);
+
+  let rt = (postId) => {
+    if (user.posts.retweets.includes(user._id)) {
+      console.log("user_id ist " + user._id + " and user includes in retweets this id?: " + user.posts.retweets.includes(user._id))
+      let retweeted = `${user.username} retweeetete`
+      return retweeted
+    } else { console.log("userid not found in rts?"); }
+  }
+  //rt not yet implemented -> muss mir dazu noch eine genaue Lösung einfallen lassen. Evtl ein Abbild basierend auf der PostId erstellen? Da mehrere User retweeten können und der Tweet dann nochmals erscheint (aber alle Retweets gelöscht werden, wenn das Original gelöscht wird.)
 
   return (
     <div token={props.token}>
