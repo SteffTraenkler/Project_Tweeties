@@ -1,50 +1,50 @@
 import { Link } from "react-router-dom";
 import Post from "./Post";
 import {
-  CommentInteraction,
-  LikeInteraction,
-  RetweetInteraction,
-  ShareInteraction,
+    CommentInteraction,
+    LikeInteraction,
+    RetweetInteraction,
+    ShareInteraction,
 } from "./PostInteraction";
 
 export default function PostList(props) {
-  console.log(props.posts);
+    console.log(props.posts);
 
-  return (
+return (
     <div className="postFeedListDiv">
-      {props.posts.map((post, key) => {
+        {props.posts.map((post, key) => {
         return (
-          <Link to={"/post/" + post._id} key={key}>
+            <Link to={"/post/" + post._id} key={key}>
             <div className="postFeedPostCard">
-              <Post post={post} token={props.token} />
-              <div className="iconInteractionBarDiv">
+                <Post post={post} token={props.token} />
+                <div className="iconInteractionBarDiv">
                 <CommentInteraction
-                  post={post}
-                  token={props.token}
-                  setInteractionChange={props.setInteractionChange}
-                  interactionChange={props.interactionChange}
+                    post={post}
+                    token={props.token}
+                    setInteractionChange={props.setInteractionChange}
+                    interactionChange={props.interactionChange}
                 />{" "}
                 <p>{post.comments.length}</p>
                 <RetweetInteraction
-                  post={post}
-                  token={props.token}
-                  setInteractionChange={props.setInteractionChange}
-                  interactionChange={props.interactionChange}
+                    post={post}
+                    token={props.token}
+                    setInteractionChange={props.setInteractionChange}
+                    interactionChange={props.interactionChange}
                 />{" "}
                 <p>{post.retweets.length}</p>
                 <LikeInteraction
-                  post={post}
-                  token={props.token}
-                  setInteractionChange={props.setInteractionChange}
-                  interactionChange={props.interactionChange}
+                    post={post}
+                    token={props.token}
+                    setInteractionChange={props.setInteractionChange}
+                    interactionChange={props.interactionChange}
                 />{" "}
                 <p>{post.likes.length}</p>
                 <ShareInteraction post={post} token={props.token} />
-              </div>
+                </div>
             </div>
-          </Link>
+        </Link>
         );
-      })}
+    })}
     </div>
-  );
+);
 }
