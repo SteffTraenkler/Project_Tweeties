@@ -43,7 +43,7 @@ userRouter.get("/myProfileInfo", doAuthMiddleware, async (req, res) => {
 userRouter.get("/profile/:username", doAuthMiddleware, async (req, res) => {
   try {
     const username = req.params.username;
-    const allUsers = await UserService.showUser({ username });
+    const allUsers = await UserService.showUser({ username }, req.userClaims.sub);
     res.status(200).json(allUsers);
   } catch (err) {
     console.log(err, "hier gehts nicht weiter");

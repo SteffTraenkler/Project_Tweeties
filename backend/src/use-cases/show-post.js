@@ -3,7 +3,7 @@ const { makePost } = require("../domain/Post");
 const { makeUser } = require("../domain/User");
 
 
-async function showPost({ postId }) {
+async function showPost({ postId }, userViewsId) {
     const foundPost = await PostDAO.findPostById(postId)
     if (!foundPost) {
         throw new Error("Post with provided id not found..")
@@ -17,8 +17,8 @@ async function showPost({ postId }) {
 
     const user = makeUser(foundUser)
 
-    let likedByUser = post.likes.includes(user._id.toString())
-    let rtByUser = post.retweets.includes(user._id.toString())
+    let likedByUser = post.likes.includes(userViewsId)
+    let rtByUser = post.retweets.includes(userViewsId)
 
     return {
         ...post, // Post-Objekte komplett übernehmen
