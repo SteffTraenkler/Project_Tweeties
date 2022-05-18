@@ -18,7 +18,7 @@ function VerifyEmail() {
                     <img src="" alt="" />
                     <h4>Twitter</h4>
                     {!userWasVerified && <div>Schritt 2 - E-mail verifizieren</div>}
-                    <h5>{message}</h5>
+                    <h5>{message}</h5>{console.log(message)}
                 </div>
 
                 <div>

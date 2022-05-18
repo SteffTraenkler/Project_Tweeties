@@ -26,7 +26,6 @@ function sendEmail(options) {
 
         transporter.sendMail({
             from: '"Twitter Team" <supercoderpro@gmail.com>',
-
             to,
             subject,
             text: message,
