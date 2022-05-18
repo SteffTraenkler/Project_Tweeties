@@ -7,6 +7,7 @@ import { Home } from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import PostDetail from "./Pages/PostDetail/PostDetail";
 import Profile from "./Pages/Profile/Profile";
+import ProtectedContent from "./Pages/ProtectedContent";
 import { Registration } from "./Pages/Registration/Registration";
 
 function AppRoutes() {
@@ -15,7 +16,7 @@ function AppRoutes() {
 
   const loginSuccess = (token) => {
     setToken(token);
-    navigate("/home");
+    navigate("/secure/home");
   };
 
   return (
@@ -23,22 +24,37 @@ function AppRoutes() {
       <Route path="/" element={<Login loginSuccess={loginSuccess} />} />
       <Route path="/signup" element={<Registration />} />
       {/* <Route path="/verify-email" /> */}
-      <Route
+
+      <Route path="/secure/home"
+        element={
+          <AuthRequired token={token} setToken={setToken}>
+            <ProtectedContent token={token} />
+          </AuthRequired>
+        }
+      >
+
+        <Route index element={<Home token={token} />} />
+        <Route path="user/:userId" element={<Profile token={token} />} />
+        <Route path="post/:postId" element={<PostDetail token={token} />} />
+
+      </Route>
+      {/* /> */}
+      {/* <Route
         path="/home"
         element={
           <AuthRequired token={token} setToken={setToken}>
             <Home token={token} />
           </AuthRequired>
         }
-      />
-      <Route
+      /> */}
+      {/* <Route
         path="/user/:userId"
         element={
           <AuthRequired token={token} setToken={setToken}>
             <Profile token={token} />
           </AuthRequired>
         }
-      />
+      /> */}
       <Route
         path="/addPost"
         element={
@@ -47,14 +63,14 @@ function AppRoutes() {
           </AuthRequired>
         }
       />
-      <Route
+      {/* <Route
         path="/post/:postId"
         element={
           <AuthRequired token={token} setToken={setToken}>
             <PostDetail token={token} />
           </AuthRequired>
         }
-      ></Route>
+      ></Route> */}
     </Routes>
   );
 }
