@@ -20,10 +20,10 @@ async function findAllPostsOfUserAndRts(userId) {
             $or: [
                 { postedBy: userId },
                 {
-                    retweets: userId //{$elemMatch:userId} -> für Objekt
+                    retweets: { $elemMatch: { userId } }
                 }]
         })
-        .sort({ postedAt: -1 }).toArray()
+        .sort({ postedAt: -1, }).toArray() //retweets.rtAt: -1
     return allPosts
 }
 
@@ -32,8 +32,6 @@ async function findAllLikedPostsOfUser(userId) {
     const allLikedPosts = await db.collection("posts")
         .find({ likes: userId }).sort({ postedAt: -1 }).toArray()
 }
-
-///dupliziere findAllPostsOfUser -> nutze aggregate mit map und filter, um die Posts, in denen in den Likes die UserId steckt auszugeben. Teste in der MongoDB Shell die Kombination aus find und aggregate (findAllPostsOfUser -> find({postedBy: userId} + aggregate: map posts -> filter posts.retweets === userId)) <- zusammen, damit die Posts in Reihenfolge angezeigt werden und nicht RTs und eigene Posts einzeln.
 
 async function findPostById(postId) {
     const db = await getDB()
@@ -50,19 +48,33 @@ async function insertPost(post) {
 async function likePost(postId, userId) {
     const db = await getDB()
 
-    const checkUser = await db.collection("posts").findOne({ $and: [{ _id: new ObjectId(postId) }, { likes: userId }] })
-    if (checkUser) {
-        const removeResult = await db.collection("posts").update(
+    const checkifUserLiked = await db.collection("posts").findOne({
+        $and:
+            [{ _id: new ObjectId(postId) },
+            { likes: { $elemMatch: { userId } } }
+            ]
+    })
+
+    if (checkifUserLiked) {
+        console.log("trying to remove like");
+        const removeResult = await db.collection("posts").updateOne(
             { _id: new ObjectId(postId) },
-            { $pull: { likes: userId } } //elemMatch -> bei Objekt  -> funktioniert nicht lol. Kann keine ID aus einem Objekt lesen und beide rausnehmen
+            { $pull: { likes: { userId: userId } } }  //elemMatch -> bei Objekt  -> funktioniert nicht lol. Kann keine ID aus einem Objekt lesen und beide rausnehmen
+            // {likes:{$elemMatch: {userId}}}
         )
         return removeResult
     }
 
-    if (!checkUser) {
+    if (!checkifUserLiked) {
+
+        const userInfo = {
+            userId: userId,
+            likedAt: Date.now()
+        }
+
         const insertionResult = await db.collection("posts").updateOne(
             { _id: new ObjectId(postId) },
-            { $push: { likes: userId } }
+            { $push: { likes: userInfo } }
         )
         return insertionResult
     }
@@ -72,19 +84,30 @@ async function likePost(postId, userId) {
 async function retweetPost(postId, userId) {
     const db = await getDB()
 
-    const checkUser = await db.collection("posts").findOne({ $and: [{ _id: new ObjectId(postId) }, { retweets: userId }] })
-    if (checkUser) {
-        const removeResult = await db.collection("posts").update(
+    const checkUser = await db.collection("posts").findOne({
+        $and: [
             { _id: new ObjectId(postId) },
-            { $pull: { retweets: userId } } //elemMatch -> bei Objekt  -> funktioniert nicht lol. Kann keine ID aus einem Objekt lesen und beide rausnehmen
+            { retweets: { $elemMatch: { userId } } }
+        ]
+    })
+    if (checkUser) {
+        const removeResult = await db.collection("posts").updateOne(
+            { _id: new ObjectId(postId) },
+            { $pull: { retweets: { userId: userId } } } //elemMatch -> bei Objekt  -> funktioniert nicht lol. Kann keine ID aus einem Objekt lesen und beide rausnehmen
         )
         return removeResult
     }
 
     if (!checkUser) {
+
+        const userInfo = {
+            userId: userId,
+            rtdAt: Date.now()
+        }
+
         const insertionResult = await db.collection("posts").updateOne(
             { _id: new ObjectId(postId) },
-            { $push: { retweets: userId } }
+            { $push: { retweets: userInfo } }
         )
         return insertionResult
     }
