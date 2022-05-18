@@ -5,12 +5,13 @@ const { useParams, Link } = require("react-router-dom");
 const { apiBaseUrl } = require("../../api/api");
 
 const Profile = (props) => {
-  const { userId } = useParams();
+    const { userId } = useParams();
 
-  const [user, setUser] = useState();
-  const [error, setError] = useState("");
+    const [user, setUser] = useState();
+    const [error, setError] = useState("");
 
-  const [interactionChange, setInteractionChange] = useState(false);
+    const [interactionChange, setInteractionChange] = useState(false);
+
 
   useEffect(() => {
     fetch(apiBaseUrl + "/api/users/profile/" + userId, {
@@ -40,33 +41,35 @@ const Profile = (props) => {
   }
   //rt not yet implemented -> muss mir dazu noch eine genaue Lösung einfallen lassen. Evtl ein Abbild basierend auf der PostId erstellen? Da mehrere User retweeten können und der Tweet dann nochmals erscheint (aber alle Retweets gelöscht werden, wenn das Original gelöscht wird.)
 
-  return (
-    <div token={props.token}>
-      {error ? (
-        <h2>{error}</h2>
-      ) : user ? (
-        <div>
-          <div>
-            <img src={user.profilePicture} alt={"Avatar of " + user.username} />
-          </div>
+   
 
-          <div>
-            <div>
-              <h1>{user.username}</h1>
-              <h2>@{user.uniqueUsername}</h2>
-              <button>Profile Bearbeiten</button>
-            </div>
-            <h3>{user.posts.length} Posts</h3>
-            <h3>{user.email}</h3>
-          </div>
-          <hr />
-          <PostList
-            posts={user.posts}
-            token={props.token}
-            setInteractionChange={setInteractionChange}
-            interactionChange={interactionChange}
-          />
-          {/* <div>
+    return (
+        <div token={props.token}>
+            {error ? (
+                <h2>{error}</h2>
+            ) : user ? (
+                <div>
+                    <div>
+                        <img src={user.profilePicture} alt={"Avatar of " + user.username} />
+                    </div>
+
+                    <div>
+                        <div>
+                            <h1>{user.username}</h1>
+                            <h2>@{user.uniqueUsername}</h2>
+                            <button>Profile Bearbeiten</button>
+                        </div>
+                        <h3>{user.posts.length} Posts</h3>
+                        <h3>{user.email}</h3>
+                    </div>
+                    <hr />
+                    <PostList
+                        posts={user.posts}
+                        token={props.token}
+                        setInteractionChange={setInteractionChange}
+                        interactionChange={interactionChange}
+                    />
+                    {/* <div>
             {user.posts.map((post, index) => (
               
               <Link to={"/post/" + post._id} key={index}>
@@ -80,12 +83,12 @@ const Profile = (props) => {
             ))}
           </div> */}
 
-          <Link to={"/home"}>Back to Home</Link>
+                    <Link to={"/home"}>Back to Home</Link>
+                </div>
+            ) : (
+                <h2>Loading ...</h2>
+            )}
         </div>
-      ) : (
-        <h2>Loading ...</h2>
-      )}
-    </div>
-  );
+    );
 };
 export default Profile;
