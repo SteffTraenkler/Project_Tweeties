@@ -1,6 +1,6 @@
 const { PostDAO, UserDAO } = require("../db-access");
 
-async function listMainFeed() {
+async function listMainFeed(userViewsId) {
     const allPosts = await PostDAO.findAllPosts()
 
     const allUserIdsWhoPosted = allPosts.map(post => post.postedBy)
@@ -12,6 +12,11 @@ async function listMainFeed() {
         uniqueUsername: user.uniqueUsername,
         profilePicture: user.profilePicture
     }))
+
+    allPosts.map(item => {
+        item.likedByUser = item.likes.some(u => u.userId === userViewsId),
+            item.rtByUser = item.retweets.some(u => u.userId === userViewsId)
+    })
 
     const mainFeedPosts = allPosts.map(post => ({
         ...post, //nutze alle Felder von Post

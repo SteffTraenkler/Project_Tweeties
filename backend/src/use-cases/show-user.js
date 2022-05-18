@@ -15,27 +15,28 @@ async function showUser({ username }, userViewsId) {
   const userView = userToUserView(user);
 
   const posts = await PostDAO.findAllPostsOfUserAndRts(user._id.toString());
+
   posts.map(item => {
-    item.likedByUser = item.likes.includes(userViewsId),
-      item.rtByUser = item.retweets.includes(userViewsId)
+    item.likedByUser = item.likes.some(u => u.userId === userViewsId),
+      item.rtByUser = item.retweets.some(u => u.userId === userViewsId)
   })
 
-    const allUserIdsWhoPosted = posts.map(post => post.postedBy)
-    const userList = await UserDAO.findUsersByIdList(allUserIdsWhoPosted)
+  const allUserIdsWhoPosted = posts.map(post => post.postedBy)
+  const userList = await UserDAO.findUsersByIdList(allUserIdsWhoPosted)
 
   const userListToUserListView = userList.map(user => ({
-        _id: user._id,
-        username: user.username,
-        uniqueUsername: user.uniqueUsername,
-        profilePicture: user.profilePicture
+    _id: user._id,
+    username: user.username,
+    uniqueUsername: user.uniqueUsername,
+    profilePicture: user.profilePicture
   }))
 
   const finalPosts = posts.map(post => ({
-        ...post, //nutze alle Felder von Post
-        postedBy: userListToUserListView.find(u => u._id.toString() === post.postedBy)   //überschreibe postedBy mit Userinfos ( username, uniqueUsername, profilePicture)
-    }))
-  
-  
+    ...post, //nutze alle Felder von Post
+    postedBy: userListToUserListView.find(u => u._id.toString() === post.postedBy)   //überschreibe postedBy mit Userinfos ( username, uniqueUsername, profilePicture)
+  }))
+
+
   return { ...userView, posts: finalPosts };
 }
 

@@ -3,7 +3,10 @@ function userToUserView(user) {
         _id: user._id,
         profilePicture: user.profilePicture,
         username: user.username,
-        uniqueUsername: user.uniqueUsername
+        uniqueUsername: user.uniqueUsername,
+        biography: user.biography,
+        follower: user.follower,
+        following: user.following,
     }
 }
 

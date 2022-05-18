@@ -17,8 +17,8 @@ async function showPost({ postId }, userViewsId) {
 
     const user = makeUser(foundUser)
 
-    let likedByUser = post.likes.includes(userViewsId)
-    let rtByUser = post.retweets.includes(userViewsId)
+    let likedByUser = post.likes.some(u => u.userId === userViewsId)
+    let rtByUser = post.retweets.some(u => u.userId === userViewsId)
 
     return {
         ...post, // Post-Objekte komplett übernehmen
