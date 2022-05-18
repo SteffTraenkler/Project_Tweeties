@@ -11,6 +11,9 @@ function makeUser({
   passwordHash,
   passwordSalt,
   sixDigitVerificationCode,
+  biography = "",
+  following = [],
+  follower = []
 }) {
   if (!username) {
     throw new Error("Username must exist.");
@@ -30,6 +33,9 @@ function makeUser({
     passwordHash,
     passwordSalt,
     sixDigitVerificationCode,
+    biography,
+    follower,
+    following,
   };
 }
 

@@ -48,14 +48,14 @@ async function insertPost(post) {
 async function likePost(postId, userId) {
     const db = await getDB()
 
-    const checkifUserLiked = await db.collection("posts").findOne({
+    const checkIfUserLiked = await db.collection("posts").findOne({
         $and:
             [{ _id: new ObjectId(postId) },
             { likes: { $elemMatch: { userId } } }
             ]
     })
 
-    if (checkifUserLiked) {
+    if (checkIfUserLiked) {
         console.log("trying to remove like");
         const removeResult = await db.collection("posts").updateOne(
             { _id: new ObjectId(postId) },
@@ -65,7 +65,7 @@ async function likePost(postId, userId) {
         return removeResult
     }
 
-    if (!checkifUserLiked) {
+    if (!checkIfUserLiked) {
 
         const userInfo = {
             userId: userId,
@@ -84,13 +84,13 @@ async function likePost(postId, userId) {
 async function retweetPost(postId, userId) {
     const db = await getDB()
 
-    const checkUser = await db.collection("posts").findOne({
+    const checkIfUserRTd = await db.collection("posts").findOne({
         $and: [
             { _id: new ObjectId(postId) },
             { retweets: { $elemMatch: { userId } } }
         ]
     })
-    if (checkUser) {
+    if (checkIfUserRTd) {
         const removeResult = await db.collection("posts").updateOne(
             { _id: new ObjectId(postId) },
             { $pull: { retweets: { userId: userId } } } //elemMatch -> bei Objekt  -> funktioniert nicht lol. Kann keine ID aus einem Objekt lesen und beide rausnehmen
@@ -98,7 +98,7 @@ async function retweetPost(postId, userId) {
         return removeResult
     }
 
-    if (!checkUser) {
+    if (!checkIfUserRTd) {
 
         const userInfo = {
             userId: userId,

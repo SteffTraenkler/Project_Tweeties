@@ -12,14 +12,12 @@ const pictureUploardMiddleware = multer().single("picture")
 postsRouter.get("/feed", doAuthMiddleware, async (req, res) => {
 
     try {
-        const result = await PostService.listMainFeed()
-        result.map(item => {
-            item.likedByUser = item.likes.includes(req.userClaims.sub),
-                item.rtByUser = item.retweets.includes(req.userClaims.sub)
-        })
+        const result = await PostService.listMainFeed(req.userClaims.sub)
+
         res.status(200).json(result)
 
     } catch (err) {
+        console.log(err);
         res.status(500).json({ err: { message: err ? err.message : "Unknown error while loading feed" } })
     }
 })

@@ -20,13 +20,34 @@ userRouter.get("/all", async (_, res) => {
       },
     });
   }
-}); 
+});
 
 // Profil Info & User ProfileID
 userRouter.get("/myProfileInfo", doAuthMiddleware, async (req, res) => {
   try {
     const userId = req.userClaims.sub; // an den token wird erkannt, um welchen user es sich handelt
     const allUsers = await UserService.showProfileInfo({ userId });
+
+    res.status(200).json(allUsers); // 200 Means Anfrage is Erfolgreich verlaufen
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: {
+        message: error
+          ? error.message
+          : "Unkown error while loading your Profile.",
+      },
+    });
+  }
+});
+
+userRouter.get("/myProfileFeed", doAuthMiddleware, async (req, res) => {
+  try {
+    const userId = req.userClaims.sub; // an den token wird erkannt, um welchen user es sich handelt
+    const yourUserInfo = await UserService.showProfileInfo({ userId });
+    const username = yourUserInfo.username
+    const allUsers = await UserService.showUser({ username }, userId);
+
     res.status(200).json(allUsers); // 200 Means Anfrage is Erfolgreich verlaufen
   } catch (error) {
     console.log(error);
@@ -44,10 +65,12 @@ userRouter.get("/profile/:username", doAuthMiddleware, async (req, res) => {
   try {
     const username = req.params.username;
     console.log("username from profiel:username", username);
+
     const allUsers = await UserService.showUser({ username }, req.userClaims.sub);
+
     res.status(200).json(allUsers);
   } catch (err) {
-    console.log("hier gehts nicht weiter");
+    console.log("error catch in showUser Route", err);
     res.status(500).json({
       err: {
         message: err ? err.message : "Unknown error while loading Profile.",

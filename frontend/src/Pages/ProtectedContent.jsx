@@ -2,11 +2,11 @@ import { Outlet } from "react-router-dom";
 import { NavbarMain } from "../Components/NavbarMain";
 
 
-export default function ProtectedContent(prop) {
+export default function ProtectedContent(props) {
 
     return (
         <div>
-            <NavbarMain />
+            <NavbarMain token={props.token} />
             <Outlet />
         </div>
     )
