@@ -4,6 +4,9 @@ const { userToUserView } = require("./functions/userToUserView");
 
 async function showUser({ username }, userViewsId) {
   const foundUser = await UserDAO.findUserByUsername(username);
+
+
+
   if (!foundUser) {
     throw new Error("User doesn't exist anymore");
   }
@@ -17,7 +20,23 @@ async function showUser({ username }, userViewsId) {
       item.rtByUser = item.retweets.includes(userViewsId)
   })
 
-  return { ...userView, posts };
+    const allUserIdsWhoPosted = posts.map(post => post.postedBy)
+    const userList = await UserDAO.findUsersByIdList(allUserIdsWhoPosted)
+
+  const userListToUserListView = userList.map(user => ({
+        _id: user._id,
+        username: user.username,
+        uniqueUsername: user.uniqueUsername,
+        profilePicture: user.profilePicture
+  }))
+
+  const finalPosts = posts.map(post => ({
+        ...post, //nutze alle Felder von Post
+        postedBy: userListToUserListView.find(u => u._id.toString() === post.postedBy)   //überschreibe postedBy mit Userinfos ( username, uniqueUsername, profilePicture)
+    }))
+  
+  
+  return { ...userView, posts: finalPosts };
 }
 
 module.exports = {
