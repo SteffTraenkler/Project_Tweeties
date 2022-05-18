@@ -59,13 +59,13 @@ export default function AddTweetForm(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data._id && (data.postText || data.picture)) {
-          navigate("/home");
+          navigate("/secure/home");
         }
       });
   };
 
   const returnHome = () => {
-    navigate("/home");
+    navigate("/secure/home");
   };
 
   console.log(profileInfo);

@@ -1,27 +1,24 @@
-.birdieLogin {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-}
-.birdieLogin img {
-  grid-column: 2/3;
-  justify-self: center;
-}
 .birdie {
   display: grid;
   grid-template-columns: repeat(3, auto);
-  border-bottom: 1px lightgray solid;
+  border-bottom: 2px #1da1f2 solid;
+  border-bottom-left-radius:30%;
+  border-bottom-right-radius:30%;
 }
 .birdie .bird {
   grid-column: 2/3;
   justify-self: center;
 }
 .bird img {
-  width: 50%;
+  width: 70%;
   text-align: center;
-  padding-top: 25%;
+  padding-top: 5%;
+}
+.bird img:hover {
+  transform: rotate(60deg);
 }
 .backBtn {
   grid-column: 1/2;
-  justify-self: start;
-  padding: 25% 0 0 10%;
+  justify-self: center;
+align-self: center;
 }
