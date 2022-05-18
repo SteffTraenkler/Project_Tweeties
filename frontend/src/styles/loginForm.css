@@ -100,7 +100,15 @@ h1 {
   border-radius: 5px;
   border: 1px solid #1da1f2;
 }
-
+.register:hover{
+  width: 80%;
+  background: #fff;
+  padding: 9px;
+  color: #1da1f2;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #1da1f2;
+}
 /* Login terms */
 .terms {
   width: 75%;

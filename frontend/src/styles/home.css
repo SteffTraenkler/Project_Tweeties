@@ -25,7 +25,6 @@
 .post {
   display: flex;
   align-items: flex-start;
-  border-top: 1px solid gray;
   padding-bottom: 5px;
   cursor: pointer;
 }
@@ -96,6 +95,7 @@
   align-items: baseline;
   gap: 6%;
   line-height: 0;
+  border-bottom: 1px solid #1da1f2;
 }
 .iconInteractionBarDiv img {
   width: 80%;
