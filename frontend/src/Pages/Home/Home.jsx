@@ -37,7 +37,6 @@ export const Home = (props) => {
 
   return (
     <div>
-      <NavbarMain />
       {/* <aside>
         <p>
         Modal-Fenster Component
