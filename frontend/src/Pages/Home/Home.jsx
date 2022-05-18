@@ -49,7 +49,7 @@ export const Home = (props) => {
             Sorry 😧, your feed is currently empty... Add your first post!
           </h2>
         ) : (
-          <PostList posts={posts} token={props.token} setInteractionChange={setInteractionChange} interactionChange={interactionChange}  />
+          <PostList posts={posts} token={props.token} setInteractionChange={setInteractionChange} interactionChange={interactionChange} />
         )}
       </article>
       <div className="posRela">

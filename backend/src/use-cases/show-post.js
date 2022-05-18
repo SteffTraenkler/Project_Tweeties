@@ -17,8 +17,13 @@ async function showPost({ postId }) {
 
     const user = makeUser(foundUser)
 
+    let likedByUser = post.likes.includes(user._id.toString())
+    let rtByUser = post.retweets.includes(user._id.toString())
+
     return {
         ...post, // Post-Objekte komplett übernehmen
+        likedByUser,
+        rtByUser,
         postedBy: { //-> postedBy ersetzen/überschreiben um nur die relevanten Daten weiterzugeben
             _id: user._id,
             profilePicture: user.profilePicture,

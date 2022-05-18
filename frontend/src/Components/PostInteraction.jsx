@@ -24,7 +24,7 @@ const LikeInteraction = (props) => {
         console.log("likeToggle used...", data);
       });
   };
-
+  console.log(props.post.likedByUser);
   return (
     <div
       onClick={likePost}
@@ -37,15 +37,33 @@ const LikeInteraction = (props) => {
 
 const CommentInteraction = (props) => {
   return (
-    <div>
+    <div >
       <img src={CommentIcon} alt="Link to comment this tweet" />
     </div>
   );
 };
 
 const RetweetInteraction = (props) => {
+  const retweetPost = (event) => {
+    event.preventDefault()
+
+    fetch(apiBaseUrl + "/api/posts/retweet/" + props.post._id, {
+      method: "POST",
+      headers: {
+        token: "JWT " + props.token,
+      },
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        props.interactionChange
+          ? props.setInteractionChange(false)
+          : props.setInteractionChange(true)
+        console.log("rt toggle used", data);
+      })
+  }
   return (
-    <div>
+    <div onClick={retweetPost}
+      className={props.post.rtByUser ? "retweet-activated" : "retweet-deactivated"}>
       <img src={RetweetIcon} alt="Link to Retweet this Tweet" />
     </div>
   );
