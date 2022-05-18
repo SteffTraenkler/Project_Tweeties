@@ -58,7 +58,7 @@ userRouter.get("/profile/:username", doAuthMiddleware, async (req, res) => {
 userRouter.get("/profile/likes/:username", doAuthMiddleware, async (req, res) => {
   try {
     const username = req.params.username
-    const allUsers = await UserService.showUsersLikedPosts({ username })
+    const allUsers = await UserService.showUsersLikedPosts({ username }, req.userClaims.sub)
 
     res.status(200).json(allUsers)
 
