@@ -2,6 +2,7 @@ const { UserDAO } = require("../db-access")
 const { createRandomSalt, createPasswordHash, generateRandomSixDigitCode } = require("../utils/hash")
 const { makeUser } = require("../domain/User")
 const { userToUserView } = require("./functions/userToUserView")
+const { sendEmail } = require("../utils/sendEmail")
 
 async function registerUser({ username, email, password }) {
     const foundUser = await UserDAO.findUserByEmailOrUsernameOrUniqueUsername(username, email)
@@ -26,7 +27,7 @@ async function registerUser({ username, email, password }) {
         throw new Error("Registration failed, please try again.")
     }
 
-    // await sendEmailVerification(user)                           //-> Email Code schicken
+    await sendEmailVerification(user)  //-> Email Code schicken
 
     const registeredUser = await UserDAO.findUserByID(insertResult.insertedId)
     const registeredUserView = userToUserView(registeredUser)

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { apiBaseUrl } from "../../api/api";
 import "../../styles/loginForm.css";
 
@@ -26,9 +26,16 @@ export const RegisterForm = () => {
       .then((response) => response.json())
       .then((data) => {
         if (!data.err) {
-          navigate("/");
+          navigate("/verify-email");
           return;
         }
+
+        if (data.err.validationErrors) {
+          const firstError = data.err.validationErrors[0]
+          setError(firstError.msg + ": " + firstError.param)
+          return
+        }
+
         setError(data.err.message);
       });
   };

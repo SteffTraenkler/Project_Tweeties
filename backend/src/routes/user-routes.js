@@ -97,6 +97,24 @@ userRouter.post(
   }
 );
 
+userRouter.post("/verifyEmail",
+  // facade layer
+  body("email").isEmail(),
+  body("sixDigitCode").isLength({ min: 6 }),
+  doValidations,
+  async (req, res) => {
+    try {
+      const email = req.body.email
+      const sixDigitCode = req.body.sixDigitCode
+      const result = await UserService.verifyUserEmail
+    } catch (error) {
+      console.log(err);
+      res.status(500).json({ err: { message: err ? err.message : "Unknown error while verifying your email."}})
+    }
+  }
+
+)
+
 userRouter.post("/refreshtoken", async (req, res) => {
   try {
     const result = await UserService.refreshUserToken({
