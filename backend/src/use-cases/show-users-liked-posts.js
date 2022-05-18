@@ -3,7 +3,7 @@ const { makeUser } = require("../domain/User");
 const { userToUserView } = require("./functions/userToUserView");
 
 
-async function showUsersLikedPosts({ username }) {
+async function showUsersLikedPosts({ username }, userViewsId) {
     const foundUser = await UserDAO.findUserByUsername(username)
 
     if (!foundUser) {
@@ -15,8 +15,8 @@ async function showUsersLikedPosts({ username }) {
 
     const likedposts = await PostDAO.findAllLikedPostsOfUser(user._id.toString())
     likedposts.map(item => {
-        item.likedByUser = item.likes.includes(user._id.toString()),
-            item.rtByUser = item.retweets.includes(user._id.toString())
+        item.likedByUser = item.likes.includes(userViewsId),
+            item.rtByUser = item.retweets.includes(userViewsId)
     })
 
     return { ...userView, likedposts }

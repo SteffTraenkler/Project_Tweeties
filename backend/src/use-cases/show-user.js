@@ -2,7 +2,7 @@ const { UserDAO, PostDAO } = require("../db-access");
 const { makeUser } = require("../domain/User");
 const { userToUserView } = require("./functions/userToUserView");
 
-async function showUser({ username }) {
+async function showUser({ username }, userViewsId) {
   const foundUser = await UserDAO.findUserByUsername(username);
   if (!foundUser) {
     throw new Error("User doesn't exist anymore");
@@ -13,8 +13,8 @@ async function showUser({ username }) {
 
   const posts = await PostDAO.findAllPostsOfUserAndRts(user._id.toString());
   posts.map(item => {
-    item.likedByUser = item.likes.includes(user._id.toString()),
-      item.rtByUser = item.retweets.includes(user._id.toString())
+    item.likedByUser = item.likes.includes(userViewsId),
+      item.rtByUser = item.retweets.includes(userViewsId)
   })
 
   return { ...userView, posts };
