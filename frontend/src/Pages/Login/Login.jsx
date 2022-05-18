@@ -42,9 +42,20 @@ function Login(props) {
           </div>
           <div className="terms">
             <small>
-              By singing up, you agree to our <a href="#">Terms, </a>
-              <a href="#">Privacy, </a>
-              <a href="#">Policy </a> and <a href="#">Cookie Use.</a>
+              By singing up, you agree to our{" "}
+              <a className="blueTerms" href="#">
+                Terms,{" "}
+              </a>
+              <a className="blueTerms" href="#">
+                Privacy,{" "}
+              </a>
+              <a className="blueTerms" href="#">
+                Policy{" "}
+              </a>{" "}
+              and{" "}
+              <a className="blueTerms" href="#">
+                Cookie Use.
+              </a>
             </small>
           </div>
         </div>

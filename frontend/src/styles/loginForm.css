@@ -15,6 +15,11 @@ form {
 }
 a {
   text-decoration: none;
+  color: unset;
+}
+
+.blueTerms {
+  text-decoration: none;
   color: #1da1f2;
 }
 input {

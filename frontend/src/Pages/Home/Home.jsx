@@ -5,6 +5,7 @@ import PostList from "../../Components/PostList";
 import { useNavigate } from "react-router-dom";
 import postTweet from "../../assets/icons/tweet&mess/Add text icon.png";
 import "../../styles/home.css";
+import { NavbarMain } from "../../Components/NavbarMain";
 
 export const Home = (props) => {
   const [posts, setPosts] = useState([]);
@@ -36,6 +37,7 @@ export const Home = (props) => {
 
   return (
     <div>
+      <NavbarMain />
       {/* <aside>
         <p>
         Modal-Fenster Component
@@ -49,7 +51,7 @@ export const Home = (props) => {
             Sorry 😧, your feed is currently empty... Add your first post!
           </h2>
         ) : (
-          <PostList posts={posts} token={props.token} setInteractionChange={setInteractionChange} interactionChange={interactionChange}  />
+          <PostList posts={posts} token={props.token} setInteractionChange={setInteractionChange} interactionChange={interactionChange} />
         )}
       </article>
       <div className="posRela">

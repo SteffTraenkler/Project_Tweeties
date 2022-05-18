@@ -13,7 +13,10 @@ postsRouter.get("/feed", doAuthMiddleware, async (req, res) => {
 
     try {
         const result = await PostService.listMainFeed()
-        result.map(item => item.likedByUser = item.likes.includes(req.userClaims.sub))
+        result.map(item => {
+            item.likedByUser = item.likes.includes(req.userClaims.sub),
+                item.rtByUser = item.retweets.includes(req.userClaims.sub)
+        })
         res.status(200).json(result)
 
     } catch (err) {
@@ -75,6 +78,21 @@ postsRouter.post("/like/:postId", doAuthMiddleware, async (req, res) => {
     } catch (err) {
         res.status(500).json({ err: { message: err ? err.message : "Unknown error while liking posts." } })
     }
+})
+
+postsRouter.post("/retweet/:postId", doAuthMiddleware, async (req, res) => {
+
+    try {
+        const postId = req.params.postId
+        const userId = req.userClaims.sub
+        const result = await PostService.retweetPost({ postId, userId })
+
+        res.status(200).json(result)
+
+    } catch (err) {
+        res.status(500).json({ err: { message: err ? err.message : "Unknown error while retweeting post." } })
+    }
+
 })
 
 module.exports = {

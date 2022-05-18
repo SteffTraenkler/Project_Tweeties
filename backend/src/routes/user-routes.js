@@ -55,6 +55,18 @@ userRouter.get("/profile/:username", doAuthMiddleware, async (req, res) => {
   }
 });
 
+userRouter.get("/profile/likes/:username", doAuthMiddleware, async (req, res) => {
+  try {
+    const username = req.params.username
+    const allUsers = await UserService.showUsersLikedPosts({ username })
+
+    res.status(200).json(allUsers)
+
+  } catch (err) {
+    res.status(500).json({ err: { message: err ? err.message : "Unknown error while loading liked posts" } })
+  }
+})
+
 //Login & Registration!!
 userRouter.post(
   "/login",

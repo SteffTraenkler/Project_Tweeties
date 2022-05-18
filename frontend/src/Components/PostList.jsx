@@ -6,6 +6,7 @@ import {
     RetweetInteraction,
     ShareInteraction,
 } from "./PostInteraction";
+import "../styles/postInteraction.css";
 
 export default function PostList(props) {
     console.log(props.posts);
@@ -38,7 +39,9 @@ return (
                     setInteractionChange={props.setInteractionChange}
                     interactionChange={props.interactionChange}
                 />{" "}
-                <p>{post.likes.length}</p>
+                <p className={post.likedByUser ? "liked" : "dislike"}>
+                  {post.likes.length}
+                </p>
                 <ShareInteraction post={post} token={props.token} />
                 </div>
             </div>
