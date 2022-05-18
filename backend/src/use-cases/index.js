@@ -5,6 +5,7 @@ const { listAllUsers } = require("./list-all-users");
 const { showProfileInfo } = require("./show-profile");
 const { showUser } = require("./show-user");
 const { showUsersLikedPosts } = require("./show-users-liked-posts")
+const { verifyUserEmail } = require("./verify-user-email")
 
 const { addPost } = require("./add-post");
 const { likePost } = require("./like-post");
@@ -19,7 +20,8 @@ const UserService = {
   listAllUsers,
   showProfileInfo,
   showUser,
-  showUsersLikedPosts
+  showUsersLikedPosts,
+  verifyUserEmail
 };
 
 const PostService = {

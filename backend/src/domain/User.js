@@ -7,7 +7,7 @@ function makeUser({
   username,
   uniqueUsername,
   email,
-  emailVerified = false,
+  emailVerified = false, // default value = false
   passwordHash,
   passwordSalt,
   sixDigitVerificationCode,
