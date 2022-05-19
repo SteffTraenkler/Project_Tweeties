@@ -7,7 +7,7 @@ export const Registration = () => {
   return (
     <div>
       <NavbarLogin className="show" />
-      <h1>Create your account</h1>
+      <h1 className="introText">Create your account</h1>
       <RegisterForm />
       <p className="smallTxt">Allready have an Account?</p>
       <div className="signUp">

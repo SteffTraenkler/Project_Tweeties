@@ -1,0 +1,17 @@
+.flex{
+  display: flex;
+  position: sticky;
+  bottom: 0;
+  gap: 15px;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  height: 55px;
+  border-top: 2px #1da1f2 solid;
+  border-top-left-radius:30%;
+  border-top-right-radius:30%;
+}
+.flex img{
+  width: 25px;
+  height: 25px;
+}

@@ -3,6 +3,7 @@ import ListsIcon from "../assets/icons/menuProfil/ListsIcon.png"
 import TopicIcon from "../assets/icons/menuProfil/TopicsStrokeIcon.png"
 import BookmarkIcon from "../assets/icons/menuProfil/BookmarksIcon.png"
 import MomentsIcon from "../assets/icons/menuProfil/MomentsIcon.png"
+import LogoutIcon from "../assets/icons/menuProfil/LogoutIconTwitter.png"
 import "../styles/Sidebar.css"
 
 export const SidebarData = [
@@ -36,5 +37,10 @@ export const SidebarData = [
     icon: <img src={MomentsIcon} alt="" />,
     cName: "nav-text"
   },
-
+  {
+    title: "Logout",
+    path: "/",
+    icon: <img className="logoutIcon" src={LogoutIcon} alt="" />,
+    cName: "nav-text"
+  },
 ]

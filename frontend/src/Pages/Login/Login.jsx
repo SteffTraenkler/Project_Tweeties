@@ -31,7 +31,7 @@ function Login(props) {
       ) : (
         <div>
           <NavbarLogin />
-          <h1>Finde heraus, was gerade in der Welt los ist.</h1>
+          <h1 className="introText">Finde heraus, was gerade in der Welt los ist.</h1>
           <LoginForm loginSuccess={props.loginSuccess} />
           <div className="registerMiddle">
             <Link to={"/signup"}>

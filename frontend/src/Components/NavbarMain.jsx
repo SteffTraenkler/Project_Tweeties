@@ -29,7 +29,7 @@ export const NavbarMain = (props) => {
         (<div className="birdieMain">
           <div className="navbar">
             <Link to="#" className="menu-bars">
-              <div onClick={showSidebar}>
+              <div className="profilePicNav" onClick={showSidebar}>
                 <img src={profileInfo.profilePicture} alt={`Profilbild von User ${profileInfo.username}`} />
               </div>
             </Link>
@@ -37,32 +37,33 @@ export const NavbarMain = (props) => {
           <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
             <ul className="nav-menu-items" onClick={showSidebar}>
               <li className="navbar-toggle">
+                <p>X</p>
+              </li>
+              <div className="profileInfoFlex">
                 <Link to="#" className="menu-bars">
-                  <div>
 
-                    <Link to={"/secure/home/user/" + profileInfo.username}>
-                      <div>
-                        <div>
-                          <img src={profileInfo.profilePicture} alt={`Profilbild von User ${profileInfo.username}`} />
-                        </div>
-                        <h1>{profileInfo.username}</h1>
-                        <p>@{profileInfo.uniqueUsername}</p>
+                  <Link className="profileInfo" to={"/secure/home/user/" + profileInfo.username}>
+                    <div className="firstFlex">
+                      <div className="profilePicSide">
+                        <img src={profileInfo.profilePicture} alt={`Profilbild von User ${profileInfo.username}`} />
                       </div>
-                    </Link>
-
-                    <div>
-                      <Link to="#">
-                        <p className="followingCount">{profileInfo.following.length}</p>
-                        <p>Following</p>
-                      </Link>
-                      <Link to="#">
-                        <p className="followerCount">{profileInfo.follower.length}</p>
-                        <p>Follower</p>
-                      </Link>
+                      <h1>{profileInfo.username}</h1>
+                      <p>@{profileInfo.uniqueUsername}</p>
                     </div>
+                  </Link>
+
+                  <div className="secoundFlex">
+                    <Link to="#">
+                      <p className="followingCountfollowingCount">{profileInfo.following.length}</p>
+                      <p className="followingCount">Following</p>
+                    </Link>
+                    <Link to="#">
+                      <p className="followingCountfollowingCount">{profileInfo.follower.length}</p>
+                      <p className="followingCount">Follower</p>
+                    </Link>
                   </div>
                 </Link>
-              </li>
+              </div>
               {SidebarData.map((item, index) => {
                 return (
                   <li key={index} className={item.cName}>
@@ -80,7 +81,8 @@ export const NavbarMain = (props) => {
             <img src={Birdie} alt="" />
           </Link>
           <img className="strokeIcon" src={StrokeIcon} alt="" />
-        </div>)
+        </div>
+        )
       }
     </>
   );

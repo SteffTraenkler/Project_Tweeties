@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { NavbarBottom } from "../Components/NavbarBottom";
 import { NavbarMain } from "../Components/NavbarMain";
 
 
@@ -10,6 +11,7 @@ export default function ProtectedContent(props) {
                 token={props.token}
             />
             <Outlet />
+            <NavbarBottom />
         </div>
     )
 }
