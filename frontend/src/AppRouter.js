@@ -9,6 +9,7 @@ import PostDetail from "./Pages/PostDetail/PostDetail";
 import Profile from "./Pages/Profile/Profile";
 import ProtectedContent from "./Pages/ProtectedContent";
 import { Registration } from "./Pages/Registration/Registration";
+import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
 
 function AppRoutes() {
   const [token, setToken] = useState(null);
@@ -24,7 +25,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<Login loginSuccess={loginSuccess} />} />
       <Route path="/signup" element={<Registration />} />
-      {/* <Route path="/verify-email" /> */}
+      <Route path="/verify-email" element={<VerifyEmail /> } />
 
       <Route path="/secure/home"
         element={
