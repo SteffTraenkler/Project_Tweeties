@@ -4,8 +4,8 @@ const { makeUser } = require("../domain/User")
 const { userToUserView } = require("./functions/userToUserView")
 const { sendEmail } = require("../utils/sendEmail")
 
-async function registerUser({ username, email, password }) {
-    const foundUser = await UserDAO.findUserByEmailOrUsernameOrUniqueUsername(username, email)
+async function registerUser({ username, email, password, biography, uniqueUsername }) {
+    const foundUser = await UserDAO.findUserByEmailOrUsernameOrUniqueUsername(username, email, biography, uniqueUsername)
     console.log(foundUser);
     if (foundUser) {
         const errorMessage = foundUser.username === username
@@ -19,7 +19,7 @@ async function registerUser({ username, email, password }) {
 
     const sixDigitVerificationCode = generateRandomSixDigitCode()
 
-    const user = makeUser({ username, email, passwordHash, passwordSalt, sixDigitVerificationCode })
+    const user = makeUser({ username, email, passwordHash, passwordSalt, sixDigitVerificationCode, biography, uniqueUsername })
     const insertResult = await UserDAO.insertUser(user)
 
     const wasSuccessful = insertResult.acknowledged === true && insertResult.insertedId
