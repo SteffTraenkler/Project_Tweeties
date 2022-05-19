@@ -11,7 +11,7 @@ function makeUser({
   passwordHash,
   passwordSalt,
   sixDigitVerificationCode,
-  biography = "",
+  biography = biography || "",
   following = [],
   follower = []
 }) {
