@@ -63,8 +63,9 @@ const RetweetInteraction = (props) => {
   }
   return (
     <div onClick={retweetPost}
-      className={props.post.rtByUser ? "retweet-activated" : "retweet-deactivated"}>
-      <img src={RetweetIcon} alt="Link to Retweet this Tweet" />
+    // className={props.post.rtByUser ? "retweet-activated" : "retweet-deactivated"}
+    >
+      <img className={props.post.rtByUser ? "retweet-activated" : "retweet-deactivated"} src={RetweetIcon} alt="Link to Retweet this Tweet" />
     </div>
   );
 };

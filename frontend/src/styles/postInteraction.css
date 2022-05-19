@@ -5,3 +5,10 @@
 .liked {
   color: red;
 }
+.retweet-activated{
+  background: url(../assets/icons/tweeties/RetweetIconGreen.png) no-repeat
+  center/contain;
+}
+.activated{
+  color: lime;
+}
