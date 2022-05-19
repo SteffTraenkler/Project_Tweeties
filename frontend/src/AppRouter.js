@@ -19,6 +19,7 @@ function AppRoutes() {
     navigate("/secure/home");
   };
 
+
   return (
     <Routes>
       <Route path="/" element={<Login loginSuccess={loginSuccess} />} />

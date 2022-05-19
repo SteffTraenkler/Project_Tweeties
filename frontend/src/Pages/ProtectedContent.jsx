@@ -6,7 +6,9 @@ export default function ProtectedContent(props) {
 
     return (
         <div>
-            <NavbarMain token={props.token} />
+            <NavbarMain
+                token={props.token}
+            />
             <Outlet />
         </div>
     )
