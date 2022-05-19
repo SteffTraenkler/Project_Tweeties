@@ -60,6 +60,47 @@ async function updateUser(userId, updateInfo) {
     return updateResult
 }
 
+async function followUser(yourUserId, targetUserId) {
+    const db = await getDB()
+
+    const checkIfUserFollows = await db.collection("users").findOne({
+        $and: [
+            { _id: new ObjectId(targetUserId) },
+            { follower: yourUserId }
+        ]
+    })
+
+    if (checkIfUserFollows) {
+        const removeResult = Promise.all([ //removeResult wird automatisch ein Array
+            await db.collection("users").updateOne(
+                { _id: new ObjectId(targetUserId) },
+                { $pull: { follower: yourUserId } }
+            ),
+            await db.collection("users").updateOne(
+                { _id: new ObjectId(yourUserId) },
+                { $pull: { following: targetUserId } }
+            )
+        ])
+        console.log("removeResult", removeResult);
+        return removeResult
+    }
+
+    if (!checkIfUserFollows) {
+        const insertionResult = Promise.all([
+            await db.collection("users").updateOne(
+                { _id: new ObjectId(targetUserId) },
+                { $push: { follower: yourUserId } }
+            ),
+            await db.collection("users").updateOne(
+                { _id: new ObjectId(yourUserId) },
+                { $push: { following: targetUserId } }
+            )
+        ])
+        console.log("insertionResult", insertionResult);
+        return insertionResult
+    }
+}
+
 module.exports = {
     findAllUsers,
     findUsersByIdList,
@@ -69,5 +110,6 @@ module.exports = {
     findUserByUniqueUsername,
     findUserByEmailOrUsernameOrUniqueUsername,
     insertUser,
-    updateUser
+    updateUser,
+    followUser
 }

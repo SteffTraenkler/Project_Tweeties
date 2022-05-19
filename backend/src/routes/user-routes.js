@@ -45,7 +45,7 @@ userRouter.get("/myProfileInfo", doAuthMiddleware, async (req, res) => {
 userRouter.get("/profile/:username", doAuthMiddleware, async (req, res) => {
   try {
     const username = req.params.username;
-    console.log("username from profiel:username", username);
+    console.log("username from profil:username", username);
 
     const allUsers = await UserService.showUser({ username }, req.userClaims.sub);
 
@@ -114,7 +114,7 @@ userRouter.post("/verifyEmail",
       res.status(200).json(result)
     } catch (error) {
       console.log(err);
-      res.status(500).json({ err: { message: err ? err.message : "Unknown error while verifying your email."}})
+      res.status(500).json({ err: { message: err ? err.message : "Unknown error while verifying your email." } })
     }
   }
 
@@ -163,6 +163,24 @@ userRouter.post(
     }
   }
 );
+
+//UserInteraktion
+
+userRouter.post("/follow/:userId", doAuthMiddleware, async (req, res) => {
+
+  try {
+    const yourUserId = req.userClaims.sub
+    const targetUserId = req.params.userId
+    const result = await UserService.followUnfollowUser({ yourUserId, targetUserId })
+
+    res.status(200).json(result)
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ err: { message: err ? err.message : "Unkown error while trying to follow." } })
+  }
+
+})
 
 module.exports = {
   userRouter,

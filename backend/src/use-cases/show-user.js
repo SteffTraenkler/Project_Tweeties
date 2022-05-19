@@ -24,11 +24,21 @@ async function showUser({ username }, userViewsId) {
   const allUserIdsWhoPosted = posts.map(post => post.postedBy)
   const userList = await UserDAO.findUsersByIdList(allUserIdsWhoPosted)
 
+  userList.map(u => {
+    u.yourFollower = u.following.includes(userViewsId),
+      u.youFollow = u.follower.includes(userViewsId)
+  })
+
+  let yourFollower = userView.following.includes(userViewsId)
+  let youFollow = userView.follower.includes(userViewsId)
+
   const userListToUserListView = userList.map(user => ({
     _id: user._id,
     username: user.username,
     uniqueUsername: user.uniqueUsername,
-    profilePicture: user.profilePicture
+    profilePicture: user.profilePicture,
+    youFollow: user.youFollow,
+    yourFollower: user.yourFollower
   }))
 
   const finalPosts = posts.map(post => ({
@@ -37,7 +47,12 @@ async function showUser({ username }, userViewsId) {
   }))
 
 
-  return { ...userView, posts: finalPosts };
+  return {
+    ...userView,
+    posts: finalPosts,
+    yourFollower,
+    youFollow
+  };
 }
 
 module.exports = {
