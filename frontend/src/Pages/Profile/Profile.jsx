@@ -1,4 +1,5 @@
 import PostList from "../../Components/PostList";
+import { useProfileInfo } from "../../hooks/useProfileInfo";
 
 const { useState, useEffect } = require("react");
 const { useParams, Link } = require("react-router-dom");
@@ -12,6 +13,7 @@ const Profile = (props) => {
 
   const [interactionChange, setInteractionChange] = useState(false);
 
+  const profileInfo = useProfileInfo(props.token)
 
   useEffect(() => {
     fetch(apiBaseUrl + "/api/users/profile/" + userId, {
@@ -31,17 +33,29 @@ const Profile = (props) => {
   }, [userId, props.token, interactionChange]);
 
   console.log("user", user);
+  let userID = user ? user._id : "user not yet fetched"
+  let profileInfoID = profileInfo === null ? "ProfileInfo not fetched" : profileInfo._id
 
-  let rt = (postId) => {
-    if (user.posts.retweets.includes(user._id)) {
-      console.log("user_id ist " + user._id + " and user includes in retweets this id?: " + user.posts.retweets.includes(user._id))
-      let retweeted = `${user.username} retweeetete`
-      return retweeted
-    } else { console.log("userid not found in rts?"); }
+  console.log("userID", userID);
+  console.log("ProfileInfoID", profileInfoID);
+
+  //USer
+  const followUser = (event) => {
+    event.preventDefault()
+
+    fetch(apiBaseUrl + "/api/users/follow/" + user._id, {
+      method: "POST",
+      headers: {
+        token: "JWT " + props.token,
+      },
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        interactionChange
+          ? setInteractionChange(false)
+          : setInteractionChange(true)
+      })
   }
-  //rt not yet implemented -> muss mir dazu noch eine genaue Lösung einfallen lassen. Evtl ein Abbild basierend auf der PostId erstellen? Da mehrere User retweeten können und der Tweet dann nochmals erscheint (aber alle Retweets gelöscht werden, wenn das Original gelöscht wird.)
-
-
 
   return (
     <div token={props.token}>
@@ -57,10 +71,49 @@ const Profile = (props) => {
             <div>
               <h1>{user.username}</h1>
               <h2>@{user.uniqueUsername}</h2>
-              <button>Profile Bearbeiten</button>
+              <p>{profileInfoID === userID ?
+                ""
+                : (
+                  user.yourFollower ?
+                    "Folgt dir"
+                    : ""
+                )
+              }</p>
+              <p>{user.biography}</p>
             </div>
             <h3>{user.posts.length} Posts</h3>
             <h3>{user.email}</h3>
+          </div>
+
+          <div>
+            {profileInfoID === userID ?
+              <div className="buttonProfileEdit">
+                <p>Profil bearbeiten</p>
+              </div>
+              : (user.youFollow ?
+                <div className="buttonUnfollow" onClick={followUser}>
+                  <p>Entfolgen</p>
+                </div>
+                : <div className="buttonFollow" onClick={followUser}>
+                  <p>Folgen</p>
+                </div>
+              )
+            }
+          </div>
+
+          <div>
+            <Link to="#">
+              <div>
+                <p>{user.following.length}</p>
+                <p>Folge ich</p>
+              </div>
+            </Link>
+            <Link to="#">
+              <div>
+                <p>{user.follower.length}</p>
+                <p>Follower</p>
+              </div>
+            </Link>
           </div>
           <hr />
           <PostList
