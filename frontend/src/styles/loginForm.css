@@ -75,7 +75,7 @@ button[type="button"] {
   border: 1px solid #1da1f2;
 }
 
-h1 {
+.introText {
   width: 75%;
   margin: 0 auto;
   padding: 20% 0 15% 0;

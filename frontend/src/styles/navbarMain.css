@@ -25,5 +25,50 @@ transform: rotate(60deg);
 }
 .strokeIcon {
   justify-self: center;
-  width: 22%;
+  width: 30px;
+}
+.profilePicNav{
+  width: 15vw;
+  height: 15vw;
+  margin-left:8vw;
+  margin-bottom: -15px;
+}
+.profilePicNav img{
+  width:40px;
+  height:40px;
+  object-fit: fill;
+  border-radius: 100%;
+}
+.profileInfoFlex{
+  font-size: 0.6em;
+}
+.firstFlex{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 0;
+  margin-left: 30px;
+}
+.secoundFlex{
+display: flex;
+margin-left: 30px;
+gap: 15px;
+}
+.followingCount{
+  font-size: 1.1em;
+}
+.profileInfo{
+  height:200px;
+}
+.profilePicSide{
+  width: 15vw;
+  height: 15vw;
+  margin-bottom: -15px;
+  object-fit: contain;
+}
+.profilePicSide img{
+  width:40px;
+  height:40px;
+  object-fit: fill;
+  border-radius: 100%;
 }

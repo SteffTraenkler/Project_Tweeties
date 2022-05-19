@@ -40,7 +40,6 @@ export default function Post(props) {
           )}
         </div>
       </div>
-      <hr />
       {/* <div className='iconInteractionBarDiv'>
                 <div><img src={CommentIcon} alt="Link to comment this tweet" /></div>
                 <div><img src={RetweetIcon} alt="Link to Retweet this Tweet" /></div>
