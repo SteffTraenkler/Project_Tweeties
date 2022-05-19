@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { apiBaseUrl } from "../api/api";
 import StrokeIcon from "../assets/img/StrokeIcon.png";
 import Birdie from "../assets/img/Birdie.png";
 import "../styles/navbarMain.css";
 import "../styles/Sidebar.css";
 import { SidebarData } from "./SlidebarData";
+import { useProfileInfo } from "../hooks/useProfileInfo";
 
 export const NavbarMain = (props) => {
   // let navigate = useNavigate();
@@ -13,63 +13,75 @@ export const NavbarMain = (props) => {
 
   const showSidebar = () => setSidebar(!sidebar)
 
-  const [ownedUser, setOwnedUser] = useState()
-  const [error, setError] = useState("");
+  const profileInfo = useProfileInfo(props.token);
 
-  useEffect(() => {
-    fetch(apiBaseUrl + "/api/users/myProfileFeed", {
-      headers: {
-        token: "JWT " + props.token,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.err) {
-          setError(data.err.message);
-          return;
-        }
-        console.log(data);
-        setOwnedUser(data);
-      })
-  }, [])
+  console.log("profileInfo", profileInfo);
 
-  console.log("NAVBAR ERROR", error);
-
-  console.log("NAVBAR ownedUser", ownedUser);
+  // const profileLink = "/secure/home/user/" + profileInfo.username
 
   return (
     <>
-      <div className="birdieMain">
-        <div className="navbar">
-          <Link to="#" className="menu-bars">
-            <button onClick={showSidebar}>Avatar</button>
-          </Link>
-        </div>
-        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-          <ul className="nav-menu-items" onClick={showSidebar}>
-            <li className="navbar-toggle">
-              <Link to="#" className="menu-bars">
-                <h2>x</h2>
-              </Link>
-            </li>
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </nav>
+      {(profileInfo === null || profileInfo.length < 2) ? (
+        <div>
+          <p>Loading...</p>
+        </div>)
+        :
+        (<div className="birdieMain">
+          <div className="navbar">
+            <Link to="#" className="menu-bars">
+              <div onClick={showSidebar}>
+                <img src={profileInfo.profilePicture} alt={`Profilbild von User ${profileInfo.username}`} />
+              </div>
+            </Link>
+          </div>
+          <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+            <ul className="nav-menu-items" onClick={showSidebar}>
+              <li className="navbar-toggle">
+                <Link to="#" className="menu-bars">
+                  <div>
 
-        <Link className="birdMain" to={"/secure/home"}>
-          <img src={Birdie} alt="" />
-        </Link>
-        <img className="strokeIcon" src={StrokeIcon} alt="" />
-      </div>
+                    <Link to={"/secure/home/user/" + profileInfo.username}>
+                      <div>
+                        <div>
+                          <img src={profileInfo.profilePicture} alt={`Profilbild von User ${profileInfo.username}`} />
+                        </div>
+                        <h1>{profileInfo.username}</h1>
+                        <p>@{profileInfo.uniqueUsername}</p>
+                      </div>
+                    </Link>
+
+                    <div>
+                      <Link to="#">
+                        <p className="followingCount">{profileInfo.following.length}</p>
+                        <p>Following</p>
+                      </Link>
+                      <Link to="#">
+                        <p className="followerCount">{profileInfo.follower.length}</p>
+                        <p>Follower</p>
+                      </Link>
+                    </div>
+                  </div>
+                </Link>
+              </li>
+              {SidebarData.map((item, index) => {
+                return (
+                  <li key={index} className={item.cName}>
+                    <Link to={item.path}>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </nav>
+
+          <Link className="birdMain" to={"/secure/home"}>
+            <img src={Birdie} alt="" />
+          </Link>
+          <img className="strokeIcon" src={StrokeIcon} alt="" />
+        </div>)
+      }
     </>
   );
 };
