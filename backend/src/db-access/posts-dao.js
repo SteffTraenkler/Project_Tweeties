@@ -31,6 +31,7 @@ async function findAllLikedPostsOfUser(userId) {
     const db = await getDB()
     const allLikedPosts = await db.collection("posts")
         .find({ likes: userId }).sort({ postedAt: -1 }).toArray()
+    return allLikedPosts
 }
 
 async function findPostById(postId) {

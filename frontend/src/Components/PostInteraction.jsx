@@ -6,6 +6,7 @@ import { apiBaseUrl } from "../api/api";
 import "../styles/postInteraction.css";
 
 const LikeInteraction = (props) => {
+
   const likePost = (event) => {
     event.preventDefault();
 

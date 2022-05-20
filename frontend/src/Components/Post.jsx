@@ -1,16 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import DeleteTweetIcon from "./../assets/icons/tweeties/DeleteTweetIcon.png"
 
 export default function Post(props) {
-  const [postActive, setPostActive] = useState(false)
-
-  function togglePostMore(e) {
-    postActive ?
-      setPostActive(false)
-      : setPostActive(true)
-  }
-
 
   return (
     <div className="post">
@@ -21,18 +11,6 @@ export default function Post(props) {
           </div>
         </Link>
       </div>
-
-      <div className="postToggleDeleteFollow" onClick={togglePostMore}>
-        <img src={DeleteTweetIcon} alt="Post Show more" />
-      </div>
-      {
-        postActive &&
-        < div >
-          <p>TestDiv</p>
-          <h1>next DIV</h1>
-        </div>
-      }
-
       <div className="postBody">
         <div className="postHeader">
           <Link className="flexBox" to={"/secure/home/user/" + props.post.postedBy.username}>
