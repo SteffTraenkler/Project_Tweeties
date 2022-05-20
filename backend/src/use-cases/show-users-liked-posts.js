@@ -15,12 +15,11 @@ async function showUsersLikedPosts({ username }, userViewsId) {
 
     const likedposts = await PostDAO.findAllLikedPostsOfUser(user._id.toString())
 
-    likedposts.map(item => {
-        item.likedByUser = item.likes.some(u => u.userId === userViewsId),
-            item.rtByUser = item.retweets.some(u => u.userId === userViewsId)
-    })
-
-    return { ...userView, likedposts }
+    return {
+        ...userView,
+        likedByUser: likedposts.likes.some(u => u.userId === userViewsId),
+        rtByUser: likedposts.retweets.some(u => u.userId === userViewsId)
+    }
 }
 
 module.exports = {

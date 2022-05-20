@@ -27,7 +27,6 @@ postsRouter.get("/:postId", doAuthMiddleware, async (req, res) => {
     try {
         const postId = req.params.postId
         const result = await PostService.showPost({ postId }, req.userClaims.sub)
-        console.log(result);
 
         res.status(200).json(result)
 

@@ -7,6 +7,8 @@ const { showUser } = require("./show-user");
 const { showUsersLikedPosts } = require("./show-users-liked-posts")
 const { verifyUserEmail } = require("./verify-user-email")
 const { followUnfollowUser } = require("./follow-unfollow-User")
+const { findUsersOfRtsAndLikes } = require("./find-users-of-rt-and-likes")
+const { findFollowerAndFollowing } = require("./find-followers-and-following-users")
 
 const { addPost } = require("./add-post");
 const { likePost } = require("./like-post");
@@ -23,7 +25,9 @@ const UserService = {
   showUser,
   showUsersLikedPosts,
   verifyUserEmail,
-  followUnfollowUser
+  followUnfollowUser,
+  findUsersOfRtsAndLikes,
+  findFollowerAndFollowing
 };
 
 const PostService = {

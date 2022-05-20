@@ -3,7 +3,6 @@ import RetweetIcon from "../assets/icons/tweeties/RetweetIcon.png";
 import LikeIcon from "../assets/icons/tweeties/LikeIcon.png";
 import ShareIcon from "../assets/icons/tweeties/ShareIcon.png";
 import { apiBaseUrl } from "../api/api";
-import { useState } from "react";
 import "../styles/postInteraction.css";
 
 const LikeInteraction = (props) => {
@@ -24,7 +23,7 @@ const LikeInteraction = (props) => {
         console.log("likeToggle used...", data);
       });
   };
-  console.log(props.post.likedByUser);
+
   return (
     <div
       onClick={likePost}

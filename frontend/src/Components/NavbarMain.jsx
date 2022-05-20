@@ -53,11 +53,11 @@ export const NavbarMain = (props) => {
                   </Link>
 
                   <div className="secoundFlex">
-                    <Link to="#">
+                    <Link to={"/secure/home/users/following/" + profileInfo._id}>
                       <p className="followingCountfollowingCount">{profileInfo.following.length}</p>
                       <p className="followingCount">Following</p>
                     </Link>
-                    <Link to="#">
+                    <Link to={"/secure/home/users/follower/" + profileInfo._id}>
                       <p className="followingCountfollowingCount">{profileInfo.follower.length}</p>
                       <p className="followingCount">Follower</p>
                     </Link>

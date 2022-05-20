@@ -1,11 +1,10 @@
 const { UserDAO, PostDAO } = require("../db-access");
 const { makeUser } = require("../domain/User");
+const { sortPostsByTime } = require("./functions/sort-posts-by-time");
 const { userToUserView } = require("./functions/userToUserView");
 
 async function showUser({ username }, userViewsId) {
   const foundUser = await UserDAO.findUserByUsername(username);
-
-
 
   if (!foundUser) {
     throw new Error("User doesn't exist anymore");
@@ -16,40 +15,33 @@ async function showUser({ username }, userViewsId) {
 
   const posts = await PostDAO.findAllPostsOfUserAndRts(user._id.toString());
 
-  posts.map(item => {
-    item.likedByUser = item.likes.some(u => u.userId === userViewsId),
-      item.rtByUser = item.retweets.some(u => u.userId === userViewsId)
-  })
-
   const allUserIdsWhoPosted = posts.map(post => post.postedBy)
   const userList = await UserDAO.findUsersByIdList(allUserIdsWhoPosted)
 
-  userList.map(u => {
-    u.yourFollower = u.following.includes(userViewsId),
-      u.youFollow = u.follower.includes(userViewsId)
-  })
-
-  let yourFollower = userView.following.includes(userViewsId)
-  let youFollow = userView.follower.includes(userViewsId)
+  const yourFollower = userView.following.includes(userViewsId)
+  const youFollow = userView.follower.includes(userViewsId)
 
   const userListToUserListView = userList.map(user => ({
     _id: user._id,
     username: user.username,
     uniqueUsername: user.uniqueUsername,
     profilePicture: user.profilePicture,
-    youFollow: user.youFollow,
-    yourFollower: user.yourFollower
+    youFollow: user.following.includes(userViewsId),
+    yourFollower: user.follower.includes(userViewsId)
   }))
 
   const finalPosts = posts.map(post => ({
     ...post, //nutze alle Felder von Post
+    likedByUser: post.likes.some(u => u.userId === userViewsId),
+    rtByUser: post.retweets.some(u => u.userId === userViewsId),
     postedBy: userListToUserListView.find(u => u._id.toString() === post.postedBy)   //überschreibe postedBy mit Userinfos ( username, uniqueUsername, profilePicture)
   }))
 
+  const sortedPosts = sortPostsByTime(finalPosts, userView._id)
 
   return {
     ...userView,
-    posts: finalPosts,
+    posts: sortedPosts,
     yourFollower,
     youFollow
   };
