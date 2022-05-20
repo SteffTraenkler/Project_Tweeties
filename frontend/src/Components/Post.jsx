@@ -8,6 +8,7 @@ import birdie from "../assets/img/Birdie.png";
 export default function Post(props) {
   //alttext={"Avatar of " + props.post.postedBy.username}
 
+
   return (
     <div className="post">
       <div className="userPic">

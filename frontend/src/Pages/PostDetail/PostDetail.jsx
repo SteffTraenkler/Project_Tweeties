@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { apiBaseUrl } from "../../api/api";
 import Post from "../../Components/Post";
+import "../../styles/postDetails.css"
 
 import {
     CommentInteraction,

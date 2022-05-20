@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { apiBaseUrl } from "../api/api"
 import { useProfileInfo } from "../hooks/useProfileInfo"
+import "../styles/postDetails.css"
 
 export default function ShowUsersArray(props) {
 
@@ -34,32 +35,42 @@ export default function ShowUsersArray(props) {
                 props.users.map((user, key) =>
                     <Link to={"/secure/home/user/" + user.username} key={key}>
                         <div>
-                            <div>
-                                <img src={user.profilePicture} alt={"Profile Picture of " + user.username} />
+                            <div className="flexUserInfo">
+                                <div className="retweetPic">
+                                    <img src={user.profilePicture} alt={"Profile Picture of " + user.username} />
+                                </div>
+                                <div className="rtdUserInfo">
+                                    <h1>{user.username}</h1>
+                                    <p>{user.uniqueUsername}</p>
+                                    <p>{user.biography}</p>
+                                </div>
+
+
+                                <div className="followOrUnfollow">
+                                    {profileInfoID === user._id ?
+                                        null
+                                        : (user.youFollow ?
+                                            <div className="unfollowBtn" onClick={e => followUser(e, user._id)}>
+                                                <p>Entfolgen</p>
+                                            </div>
+                                            : <div className="followBtn" onClick={e => followUser(e, user._id)}>
+                                                <p>Folgen</p>
+                                            </div>)
+                                    }
+                                    <p>
+                                        {profileInfoID === user._id
+                                            ? ""
+                                            : (user.yourFollower ?
+                                                <p className="followYou">Folgt dir</p>
+                                                : ""
+                                            )
+                                        }
+                                    </p>
+                                </div>
                             </div>
                             <div>
-                                <p>
-                                    {profileInfoID === user._id
-                                        ? ""
-                                        : (user.yourFollower ?
-                                            "Folgt dir"
-                                            : ""
-                                        )
-                                    }
-                                </p>
-                                <h1>{user.username}</h1>
-                                <p>{user.uniqueUsername}</p>
-                                <p>{user.biography}</p>
-                                {profileInfoID === user._id ?
-                                    null
-                                    : (user.youFollow ?
-                                        <div className="buttonUnfollow" onClick={e => followUser(e, user._id)}>
-                                            <p>Entfolgen</p>
-                                        </div>
-                                        : <div className="buttonFollow" onClick={e => followUser(e, user._id)}>
-                                            <p>Folgen</p>
-                                        </div>)
-                                }
+
+
                             </div>
                         </div>
                     </Link>

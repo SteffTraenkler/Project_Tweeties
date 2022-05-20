@@ -39,7 +39,7 @@
   font-size: 0.8em;
 }
 
-.buttonProfileEdit p, .buttonUnfollow p, .buttonFollow p{
+.buttonProfileEdit p:hover, .buttonUnfollow p:hover, .buttonFollow p:hover{
   border: 1px solid #1da1f2;
   background-color: #1da1f2;
   color: #fff;
