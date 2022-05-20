@@ -1,29 +1,32 @@
 const { PostDAO, UserDAO } = require("../db-access");
+const { makeUser } = require("../domain/User");
+const { showUser } = require("./show-user");
 
 async function listMainFeed(userViewsId) {
-    const allPosts = await PostDAO.findAllPosts()
+    const userViewObject = await UserDAO.findUserByID(userViewsId)
 
-    const allUserIdsWhoPosted = allPosts.map(post => post.postedBy)
-    const userList = await UserDAO.findUsersByIdList(allUserIdsWhoPosted)
+    if (!userViewObject) {
+        throw new Error("User doesn't exist anymore or problem with token")
+    }
 
-    const userListToUserListView = userList.map(user => ({
-        _id: user._id,
-        username: user.username,
-        uniqueUsername: user.uniqueUsername,
-        profilePicture: user.profilePicture
-    }))
+    const viewingUser = makeUser(userViewObject)
 
-    allPosts.map(item => {
-        item.likedByUser = item.likes.some(u => u.userId === userViewsId),
-            item.rtByUser = item.retweets.some(u => u.userId === userViewsId)
-    })
+    const allFollowingUsers = await UserDAO.findUsersByIdList(viewingUser.following)
 
-    const mainFeedPosts = allPosts.map(post => ({
-        ...post, //nutze alle Felder von Post
-        postedBy: userListToUserListView.find(u => u._id.toString() === post.postedBy)   //überschreibe postedBy mit Userinfos ( username, uniqueUsername, profilePicture)
-    }))
+    const allFeedUsers = [
+        viewingUser,
+        ...allFollowingUsers.map(user => makeUser(user))
+    ]
 
-    return mainFeedPosts
+    const showUserResults = await Promise.all(
+        allFeedUsers.map(user => showUser({ username: user.username }, userViewsId))
+    )
+
+    const feedPosts = showUserResults.map(showUserResult => showUserResult.posts).flat() //flat nimmt alle Elemente von den Unterarrays raus und macht daraus ein großes Array --> [[{1},{2},{3}],[{4},{5}]].flat() -> [{1},{2},{3},{4},{5}]
+
+    const sortedFeed = feedPosts.sort((post1, post2) => post2.sortByTimestamp - post1.sortByTimestamp)
+
+    return sortedFeed
 }
 
 module.exports = {

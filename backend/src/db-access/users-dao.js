@@ -71,12 +71,12 @@ async function followUser(yourUserId, targetUserId) {
     })
 
     if (checkIfUserFollows) {
-        const removeResult = Promise.all([ //removeResult wird automatisch ein Array
-            await db.collection("users").updateOne(
+        const removeResult = await Promise.all([ //removeResult wird automatisch ein Array
+            db.collection("users").updateOne(
                 { _id: new ObjectId(targetUserId) },
                 { $pull: { follower: yourUserId } }
             ),
-            await db.collection("users").updateOne(
+            db.collection("users").updateOne(
                 { _id: new ObjectId(yourUserId) },
                 { $pull: { following: targetUserId } }
             )
@@ -86,12 +86,12 @@ async function followUser(yourUserId, targetUserId) {
     }
 
     if (!checkIfUserFollows) {
-        const insertionResult = Promise.all([
-            await db.collection("users").updateOne(
+        const insertionResult = await Promise.all([
+            db.collection("users").updateOne(
                 { _id: new ObjectId(targetUserId) },
                 { $push: { follower: yourUserId } }
             ),
-            await db.collection("users").updateOne(
+            db.collection("users").updateOne(
                 { _id: new ObjectId(yourUserId) },
                 { $push: { following: targetUserId } }
             )

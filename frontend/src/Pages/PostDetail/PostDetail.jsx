@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { apiBaseUrl } from "../../api/api";
 import Post from "../../Components/Post";
 
@@ -14,7 +14,6 @@ import birdLogo from "../../assets/img/Birdie.png";
 export default function PostDetail(props) {
     const { postId } = useParams();
     const [post, setPost] = useState();
-
 
     const [interactionChange, setInteractionChange] = useState(false);
 
@@ -40,7 +39,7 @@ export default function PostDetail(props) {
             });
     }, [props.token, postId, interactionChange]);
 
-    console.log(post);
+    console.log("SinglePost", post);
     return (
         <div>
             {error ? (
@@ -52,12 +51,22 @@ export default function PostDetail(props) {
                         <div className="countPostInteraktionsDiv">
                             {/* onclick on the p tags with each a function!! */}
                             {post.retweets.length > 0 ? (
-                                <p>{post.retweets.length} Retweets</p>
+                                <Link to={"/secure/home/post/retweets/" + post._id}>
+                                    <p>{post.retweets.length}
+                                        <span> Retweets</span>
+                                    </p>
+                                </Link>
                             ) : null}
                             {post.quotedTweets > 0 ? (
                                 <p> {post.retweets.length} Zitierte Tweets</p>
                             ) : null}
-                            {post.likes.length > 0 ? <p>{post.likes.length} Likes</p> : null}
+                            {post.likes.length > 0 ?
+                                (<Link to={"/secure/home/post/likes/" + post._id}>
+                                    <p>{post.likes.length}
+                                        <span>Likes</span>
+                                    </p>
+                                </Link>
+                                ) : null}
                         </div>
                     ) : (
                         ""

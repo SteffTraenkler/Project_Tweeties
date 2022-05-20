@@ -102,13 +102,13 @@ const Profile = (props) => {
           </div>
 
           <div>
-            <Link to="#">
+            <Link to={"/secure/home/users/following/" + user._id}>
               <div>
                 <p>{user.following.length}</p>
                 <p>Folge ich</p>
               </div>
             </Link>
-            <Link to="#">
+            <Link to={"/secure/home/users/follower/" + user._id}>
               <div>
                 <p>{user.follower.length}</p>
                 <p>Follower</p>

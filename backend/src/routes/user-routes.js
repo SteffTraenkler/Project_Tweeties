@@ -182,6 +182,68 @@ userRouter.post("/follow/:userId", doAuthMiddleware, async (req, res) => {
 
 })
 
+
+//List of Users who rt, like, follow or are followed
+userRouter.get("/retweets/:postId", doAuthMiddleware, async (req, res) => {
+
+  try {
+
+    const result = await UserService.findUsersOfRtsAndLikes({ postId: req.params.postId, likedOrRT: "retweets", userViewsId: req.userClaims.sub })
+
+    res.status(200).json(result)
+
+  } catch (err) {
+    console.log("error Catch in retweeting Users", err);
+    res.status(500).json({ err: { message: err ? err.message : "Unknown Error while trying to see Users who rtd" } })
+  }
+})
+
+userRouter.get("/likes/:postId", doAuthMiddleware, async (req, res) => {
+
+  try {
+
+    const result = await UserService.findUsersOfRtsAndLikes({ postId: req.params.postId, likedOrRT: "likes", userViewsId: req.userClaims.sub })
+
+    res.status(200).json(result)
+
+  } catch (err) {
+    console.log("Error catch in liking Users", err);
+    res.status(500).json({ err: { message: err ? err.message : "Unknown Error while trying to get Users who liked" } })
+
+  }
+})
+
+
+userRouter.get("/following/:userId", doAuthMiddleware, async (req, res) => {
+
+  try {
+
+    const result = await UserService.findFollowerAndFollowing({ userId: req.params.userId, followOrFollowing: "following", userViewsId: req.userClaims.sub })
+
+    res.status(200).json(result)
+
+  } catch (err) {
+    console.log("Error catch in seeing following Users", err);
+    res.status(500).json({ err: { message: err ? err.message : "Unknown Error while trying to get Users who are followed" } })
+  }
+
+})
+
+userRouter.get("/follower/:userId", doAuthMiddleware, async (req, res) => {
+
+  try {
+
+    const result = await UserService.findFollowerAndFollowing({ userId: req.params.userId, followOrFollowing: "follower", userViewsId: req.userClaims.sub })
+
+    res.status(200).json(result)
+
+  } catch (err) {
+    console.log("Error catch in seeing Users who follow", err);
+    res.status(500).json({ err: { message: err ? err.message : "Unknown error whilt trying to get Users who follow" } })
+  }
+
+})
+
 module.exports = {
   userRouter,
 };
