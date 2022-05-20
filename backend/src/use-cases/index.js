@@ -15,6 +15,7 @@ const { likePost } = require("./like-post");
 const { showPost } = require("./show-post");
 const { listMainFeed } = require("./list-main-feed");
 const { retweetPost } = require("./retweetPost");
+const { deleteYourPost } = require("./delete-your-own-post")
 
 const UserService = {
   registerUser,
@@ -35,7 +36,8 @@ const PostService = {
   likePost,
   showPost,
   listMainFeed,
-  retweetPost
+  retweetPost,
+  deleteYourPost
 };
 
 module.exports = {

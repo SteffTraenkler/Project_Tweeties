@@ -12,7 +12,10 @@ export const NavbarBottom = () => {
         <Link to={"/secure/Home"} >
           <img src={HomeIcon} alt="" />
         </Link>
-        <img src={SearchIcon} alt="" />
+        <Link to={"/secure/home/user/searchUsers"}>
+          <img src={SearchIcon} alt="" />
+        </Link>
+
         <img src={BellIcon} alt="" />
         <img src={MailIcon} alt="" />
       </div>

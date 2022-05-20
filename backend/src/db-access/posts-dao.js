@@ -45,6 +45,12 @@ async function insertPost(post) {
     return insertionResult
 }
 
+async function deletePost(postId) {
+    const db = await getDB()
+    const deleteResult = await db.collection("posts").deleteOne({ _id: new ObjectId(postId) })
+    return deleteResult
+}
+
 async function likePost(postId, userId) {
     const db = await getDB()
 
@@ -130,6 +136,7 @@ module.exports = {
     likePost,
     findAllPostsOfUserAndRts,
     retweetPost,
-    findAllLikedPostsOfUser
+    findAllLikedPostsOfUser,
+    deletePost
 }
 

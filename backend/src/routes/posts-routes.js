@@ -64,6 +64,21 @@ postsRouter.post("/add",
     }
 )
 
+postsRouter.delete("/delete/post:postId", doAuthMiddleware, async (req, res) => {
+    try {
+        const postId = req.params.postId
+        const userViewsId = req.userClaims.sub
+
+        const result = await PostService.deleteYourPost({ postId, userViewsId })
+
+        res.status(200).json(result)
+
+    } catch (err) {
+        console.log("Error while trying to delete post", err);
+        res.status(500).json({ err: { message: err ? err.message : "Unknown error while trying to delete post." } })
+    }
+})
+
 postsRouter.post("/like/:postId", doAuthMiddleware, async (req, res) => {
 
     try {
