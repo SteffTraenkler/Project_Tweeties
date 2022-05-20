@@ -19,7 +19,7 @@ export default function Post(props) {
       </div>
       <div className="postBody">
         <div className="postHeader">
-          <Link to={"/secure/home/user/" + props.post.postedBy.username}>
+          <Link className="flexBox" to={"/secure/home/user/" + props.post.postedBy.username}>
             <h3>{props.post.postedBy.username}</h3>
             <p>{props.post.postedBy.uniqueUsername}</p>
           </Link>

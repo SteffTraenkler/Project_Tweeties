@@ -32,7 +32,7 @@ export default function PostList(props) {
                                     setInteractionChange={props.setInteractionChange}
                                     interactionChange={props.interactionChange}
                                 />{" "}
-                                <p>{post.retweets.length}</p>
+                                <p className={post.rtByUser ? "activated" : "deactivated"}>{post.retweets.length}</p>
                                 <LikeInteraction
                                     post={post}
                                     token={props.token}

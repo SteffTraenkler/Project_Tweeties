@@ -1,5 +1,6 @@
 import PostList from "../../Components/PostList";
 import { useProfileInfo } from "../../hooks/useProfileInfo";
+import "../../styles/userDetail.css"
 
 const { useState, useEffect } = require("react");
 const { useParams, Link } = require("react-router-dom");
@@ -63,14 +64,29 @@ const Profile = (props) => {
         <h2>{error}</h2>
       ) : user ? (
         <div>
-          <div>
+          <div className="profilePic">
             <img src={user.profilePicture} alt={"Avatar of " + user.username} />
+            <div>
+              {profileInfoID === userID ?
+                <div className="buttonProfileEdit">
+                  <p>Profil bearbeiten</p>
+                </div>
+                : (user.youFollow ?
+                  <div className="buttonUnfollow" onClick={followUser}>
+                    <p>Entfolgen</p>
+                  </div>
+                  : <div className="buttonFollow" onClick={followUser}>
+                    <p>Folgen</p>
+                  </div>
+                )
+              }
+            </div>
           </div>
 
           <div>
-            <div>
+            <div className="userInfo">
               <h1>{user.username}</h1>
-              <h2>@{user.uniqueUsername}</h2>
+              <h2>{user.uniqueUsername}</h2>
               <p>{profileInfoID === userID ?
                 ""
                 : (
@@ -81,41 +97,28 @@ const Profile = (props) => {
               }</p>
               <p>{user.biography}</p>
             </div>
+
+          </div>
+
+
+
+          <div className="follower">
             <h3>{user.posts.length} Posts</h3>
             <h3>{user.email}</h3>
-          </div>
-
-          <div>
-            {profileInfoID === userID ?
-              <div className="buttonProfileEdit">
-                <p>Profil bearbeiten</p>
-              </div>
-              : (user.youFollow ?
-                <div className="buttonUnfollow" onClick={followUser}>
-                  <p>Entfolgen</p>
-                </div>
-                : <div className="buttonFollow" onClick={followUser}>
-                  <p>Folgen</p>
-                </div>
-              )
-            }
-          </div>
-
-          <div>
             <Link to={"/secure/home/users/following/" + user._id}>
-              <div>
+              <div className="littleFlex">
                 <p>{user.following.length}</p>
                 <p>Folge ich</p>
               </div>
             </Link>
-            <Link to={"/secure/home/users/follower/" + user._id}>
-              <div>
+             <Link to={"/secure/home/users/follower/" + user._id}>
+              <div className="littleFlex">
                 <p>{user.follower.length}</p>
                 <p>Follower</p>
               </div>
             </Link>
           </div>
-          <hr />
+          <div className="blueBorder"></div>
           <PostList
             posts={user.posts}
             token={props.token}
@@ -135,8 +138,6 @@ const Profile = (props) => {
               </Link>
             ))}
           </div> */}
-
-          <Link to={"/secure/home"}>Back to Home</Link>
         </div>
       ) : (
         <h2>Loading ...</h2>

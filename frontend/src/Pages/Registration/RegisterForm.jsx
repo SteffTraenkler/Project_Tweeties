@@ -9,6 +9,11 @@ export const RegisterForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [biography, setBiography] = useState("");
+  const [uniqueUsername, setUniqueUsername] = useState("")
+
+  const [validError, setValidError] = useState("")
+
   const [error, setError] = useState("");
 
   let navigate = useNavigate();
@@ -21,7 +26,7 @@ export const RegisterForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, fullname, username, password }),
+      body: JSON.stringify({ email, fullname, username, password, biography, uniqueUsername }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -39,6 +44,29 @@ export const RegisterForm = () => {
         setError(data.err.message);
       });
   };
+
+  console.log("Unique Username", uniqueUsername);
+
+  // if (!valid) {
+  //   if (uniqueUsername.value && uniqueUsername.value.contains('@'))
+  //     setValid(true)
+  //   return
+  // }
+
+  if (uniqueUsername.length === 0) {
+    console.log("Not a @")
+  } else if (uniqueUsername.length > 0) {
+    console.log("else if function");
+
+    if (uniqueUsername && uniqueUsername.includes("@")) {
+      setValidError("Must start with a @")
+
+      console.log("Include @");
+    }
+  } else {
+    console.log("niqueUsername");
+
+  }
 
   return (
     <div>
@@ -87,9 +115,33 @@ export const RegisterForm = () => {
             autoComplete="off"
           />
         </div>
+        <div>
+          <h2>Tell us about yourself *</h2>
+          <input
+            value={biography}
+            onChange={(e) => setBiography(e.target.value)}
+            type="text"
+            className=""
+            id="floatingInput"
+            placeholder="Your Biograhpy"
+          />
+        </div>
+        <div>
+          <h2>How do you like to be called? *</h2>
+          <input
+            value={uniqueUsername}
+            onChange={(e) => setUniqueUsername(e.target.value)}
+            type="email"
+            className=""
+            id="floatingInput"
+            placeholder="@FredFuchs"
+          />
+          <h2>{ }</h2>
+        </div>
         <button onClick={doRegistration} className="" type="submit">
           Weiter
         </button>
+        <h5>*Optional not required</h5>
         {error && <p className="">{error}</p>}
       </form>
     </div>
