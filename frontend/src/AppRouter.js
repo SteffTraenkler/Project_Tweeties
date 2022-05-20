@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
+import "./index.css";
 import AuthRequired from "./Components/AuthRequired";
 import AddTweet from "./Pages/AddTweet/AddTweet";
 import { Home } from "./Pages/Home/Home";

@@ -8,11 +8,11 @@
   border-radius: 9px;
   padding: 3px 5px;
 }
-.retweetPic{
+/* .retweetPic{
   width: 15vw;
   height: 15vw;
-  /* margin-left:8vw; */
-}
+  margin-left:8vw;
+} */
 .retweetPic img{
 width:60px;
   height:60px;
@@ -22,7 +22,7 @@ width:60px;
 .backFlex{
   display: flex;
   align-items: baseline;
-  gap: 13vw;
+  gap: 5vw;
 }
 .backArrow{
   margin-left: 5vw;
@@ -38,8 +38,7 @@ grid-template-columns: repeat(3, 1fr);
 grid-template-rows: 1fr;
 grid-column-gap: 0px;
 grid-row-gap: 0px;
-  height: 30vw;
-  align-items: center;
+align-items: center;
   justify-items: center;
   border-bottom: 1px solid #1da1f2;
 }

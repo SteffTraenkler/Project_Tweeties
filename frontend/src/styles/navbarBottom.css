@@ -1,16 +1,17 @@
 .flex{
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
   position: fixed;
   bottom: 0;
-  width: 100%;
-  gap: 15px;
+  width: 386px;
+  gap: 10px;
   justify-content: space-around;
   align-items: center;
   background-color: #fff;
   height: 55px;
   border-top: 2px #1da1f2 solid;
-  border-top-left-radius:30%;
-  border-top-right-radius:30%;
+  border-top-left-radius:35px;
+  border-top-right-radius:35px;
 }
 .flex img{
   width: 25px;
