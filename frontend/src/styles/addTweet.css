@@ -14,20 +14,26 @@ textarea:valid {
   justify-content: center;
   /* margin: 50px; */
 }
+.flexTop{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.userName{
+   line-height: 5px;
+}
 .divTweetProfilePic {
-  display: inline-block;
-  position: relative;
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-  border-radius: 50%;
-  margin: 20px 0 0 10px;
+  width: 15vw;
+  height: 15vw;
+  margin-left:8vw;
+  margin-top: 5vw;
 }
 
 .divTweetProfilePic img {
-  width: auto;
-  height: 100%;
-  margin-left: -35px;
+  width:60px;
+  height:60px;
+  object-fit: fill;
+  border-radius: 50%;
 }
 
 .prevPic {
