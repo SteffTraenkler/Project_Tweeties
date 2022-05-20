@@ -1,22 +1,37 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { CommentIcon } from '../assets/img/CommentIcon.png'
-// import { RetweetIcon } from '../assets/img/RetweetIcon.png'
-// import { LikeIcon } from '../assets/img/LikeIcon.png'
-// import { ShareIcon } from '../assets/img/SahreIcon.png'
-import birdie from "../assets/img/Birdie.png";
+import DeleteTweetIcon from "./../assets/icons/tweeties/DeleteTweetIcon.png"
 
 export default function Post(props) {
-  //alttext={"Avatar of " + props.post.postedBy.username}
+  const [postActive, setPostActive] = useState(false)
+
+  function togglePostMore(e) {
+    postActive ?
+      setPostActive(false)
+      : setPostActive(true)
+  }
 
   return (
     <div className="post">
       <div className="userPic">
         <Link to={"/secure/home/user/" + props.post.postedBy.username}>
           <div className="borderAvatar">
-            <img src={props.post.postedBy.profilePicture} alt="alttext" />
+            <img src={props.post.postedBy.profilePicture} alt={"Avatar of" + props.post.postedBy.username} />
           </div>
         </Link>
       </div>
+
+      <div className="postToggleDeleteFollow" onClick={togglePostMore}>
+        <img src={DeleteTweetIcon} alt="Post Show more" />
+      </div>
+      {
+        postActive &&
+        < div >
+          <p>TestDiv</p>
+          <h1>next DIV</h1>
+        </div>
+      }
+
       <div className="postBody">
         <div className="postHeader">
           <Link className="flexBox" to={"/secure/home/user/" + props.post.postedBy.username}>
@@ -46,6 +61,6 @@ export default function Post(props) {
                 <div><img src={LikeIcon} alt="Link to like thi post / Tweet" /></div>
                 <div><img src={ShareIcon} alt="Link to share this post / Tweet" /></div>
             </div> */}
-    </div>
+    </div >
   );
 }

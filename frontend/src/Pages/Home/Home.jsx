@@ -5,7 +5,6 @@ import PostList from "../../Components/PostList";
 import { useNavigate } from "react-router-dom";
 import postTweet from "../../assets/icons/tweet&mess/Add text icon.png";
 import "../../styles/home.css";
-import { NavbarMain } from "../../Components/NavbarMain";
 
 export const Home = (props) => {
   const [posts, setPosts] = useState([]);
@@ -16,7 +15,6 @@ export const Home = (props) => {
 
 
   useEffect(() => {
-    console.log("useeffect rendert");
     fetch(apiBaseUrl + "/api/posts/feed", {
       headers: {
         token: "JWT " + props.token,
@@ -30,7 +28,6 @@ export const Home = (props) => {
           setPosts(data);
         }
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [interactionChange]);
 
   const createNewTweet = () => navigate("/addPost");
