@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiBaseUrl } from "../../api/api";
 import "../../styles/loginForm.css";
@@ -12,40 +12,56 @@ export const RegisterForm = () => {
   const [biography, setBiography] = useState("");
   const [uniqueUsername, setUniqueUsername] = useState("")
 
-  const [validError, setValidError] = useState("")
+  const [validError, setValidError] = useState(false)
 
   const [error, setError] = useState("");
 
   let navigate = useNavigate();
 
+  useEffect(() => {
+    if (uniqueUsername === "") {
+      setValidError({ error: false, msg: "emty Field" })
+    } else if (uniqueUsername.includes("@")) {
+      console.log("includes");
+      setValidError({ error: false, msg: "includes @ Tag" })
+    } else {
+      console.log("doesnt include");
+      setValidError({ error: true, msg: "missing @ Tag" })
+    }
+  }, [uniqueUsername])
+
+
+
   const doRegistration = (event) => {
     event.preventDefault();
+    if (!validError.error) {
+      fetch(apiBaseUrl + "/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, fullname, username, password, biography, uniqueUsername }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (!data.err) {
+            navigate("/verify-email");
+            return;
+          }
 
-    fetch(apiBaseUrl + "/api/users/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, fullname, username, password, biography, uniqueUsername }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (!data.err) {
-          navigate("/verify-email");
-          return;
-        }
+          if (data.err.validationErrors) {
+            const firstError = data.err.validationErrors[0]
+            setError(firstError.msg + ": " + firstError.param)
+            return
+          }
 
-        if (data.err.validationErrors) {
-          const firstError = data.err.validationErrors[0]
-          setError(firstError.msg + ": " + firstError.param)
-          return
-        }
+          setError(data.err.message);
+        });
+    };
+  }
 
-        setError(data.err.message);
-      });
-  };
 
-  console.log("Unique Username", uniqueUsername);
+
 
   // if (!valid) {
   //   if (uniqueUsername.value && uniqueUsername.value.contains('@'))
@@ -53,20 +69,25 @@ export const RegisterForm = () => {
   //   return
   // }
 
-  if (uniqueUsername.length === 0) {
-    console.log("Not a @")
-  } else if (uniqueUsername.length > 0) {
-    console.log("else if function");
+  // if (uniqueUsername.length === 0) {
+  //   console.log("Not a @")
+  // } else if (uniqueUsername.length > 0) {
+  //   console.log("else if function");
 
-    if (uniqueUsername && uniqueUsername.includes("@")) {
-      setValidError("Must start with a @")
+  //   if (uniqueUsername && uniqueUsername.includes("@")) {
+  //     setValidError("Must start with a @")
 
-      console.log("Include @");
-    }
-  } else {
-    console.log("niqueUsername");
+  //     console.log("Include @");
+  //   }
+  // } else {
+  //   console.log("niqueUsername");
 
-  }
+  // }
+
+  // if (uniqueUsername && uniqueUsername.includes("@")) {
+  //   setValidError(false)
+  // }
+
 
   return (
     <div>
@@ -136,7 +157,7 @@ export const RegisterForm = () => {
             id="floatingInput"
             placeholder="@FredFuchs"
           />
-          <h2>{ }</h2>
+          <h2>{validError.msg}</h2>
         </div>
         <button onClick={doRegistration} className="" type="submit">
           Weiter

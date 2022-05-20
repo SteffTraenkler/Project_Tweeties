@@ -27,6 +27,7 @@ async function findAllPostsOfUserAndRts(userId) {
     return allPosts
 }
 
+
 async function findAllLikedPostsOfUser(userId) {
     const db = await getDB()
     const allLikedPosts = await db.collection("posts")

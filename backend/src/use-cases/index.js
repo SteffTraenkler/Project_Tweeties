@@ -9,6 +9,7 @@ const { verifyUserEmail } = require("./verify-user-email")
 const { followUnfollowUser } = require("./follow-unfollow-User")
 const { findUsersOfRtsAndLikes } = require("./find-users-of-rt-and-likes")
 const { findFollowerAndFollowing } = require("./find-followers-and-following-users")
+const { editProfile } = require("./edit-profile")
 
 const { addPost } = require("./add-post");
 const { likePost } = require("./like-post");
@@ -28,7 +29,8 @@ const UserService = {
   verifyUserEmail,
   followUnfollowUser,
   findUsersOfRtsAndLikes,
-  findFollowerAndFollowing
+  findFollowerAndFollowing,
+  editProfile
 };
 
 const PostService = {
