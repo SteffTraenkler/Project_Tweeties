@@ -79,12 +79,18 @@ export default function AddTweetForm(props) {
         <h1>Loading....</h1>
       ) : (
         <div>
-          <Link to={"/user/" + profileInfo.username}>
-            <div className="divTweetProfilePic">
-              <img
-                src={profileInfo.profilePicture}
-                alt={"Avatar of " + profileInfo.username}
-              />
+          <Link to={"/secure/home/user/" + profileInfo.username}>
+            <div>
+              <div className="divTweetProfilePic">
+                <img
+                  src={profileInfo.profilePicture}
+                  alt={"Avatar of " + profileInfo.username}
+                />
+              </div>
+              <div>
+                <h2>{profileInfo.username}</h2>
+                <p>{profileInfo.uniqueUsername}</p>
+              </div>
             </div>
           </Link>
           <div className="dFlex">
