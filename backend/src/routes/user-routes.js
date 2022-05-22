@@ -8,9 +8,9 @@ const { UserService } = require("../use-cases");
 const userRouter = express.Router();
 
 // Authentication Required!!!
-userRouter.get("/all", async (_, res) => {
+userRouter.get("/all", doAuthMiddleware, async (req, res) => {
   try {
-    const allUsers = await UserService.listAllUsers();
+    const allUsers = await UserService.listAllUsers({ userViewsId: req.userClaims.sub });
     res.status(200).json(allUsers);
   } catch (err) {
     console.log(err);
@@ -72,8 +72,8 @@ userRouter.put("/profile/editProfile", doAuthMiddleware, async (req, res) => {
     res.status(500).json(
       {
         err: {
-        message: err ? err.message : "Unknown error while editing Profile.",
-      },
+          message: err ? err.message : "Unknown error while editing Profile.",
+        },
       }
     )
   }
