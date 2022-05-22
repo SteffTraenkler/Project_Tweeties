@@ -11,6 +11,8 @@ export default function SearchUsers(props) {
     const [interactionChange, setInteractionChange] = useState(false)
     const navigate = useNavigate()
 
+
+
     useEffect(() => {
         fetch(apiBaseUrl + "/api/users/all", {
             headers: {
@@ -58,6 +60,7 @@ export default function SearchUsers(props) {
     const errorHandlingSearch = filteredUsers ? (filteredUsers.length === 0 ? noUserSearch = "Leider konnten wir keine User mit diesem Namen finden :/" : noUserSearch) : "users not fetched yet"
 
     console.log("FILTEREDUSERS", filteredUsers);
+    console.log("allUsers", allUsers);
 
     return (
         <>
@@ -78,13 +81,21 @@ export default function SearchUsers(props) {
                                 noUser ?
                                     <h1> {noUser}</h1>
                                     :
-                                    <ShowUsersArray users={allUsers} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange} />
+                                    <ShowUsersArray
+                                        users={allUsers}
+                                        token={props.token}
+                                        interactionChange={interactionChange} setInteractionChange={setInteractionChange}
+                                    />
                             )
                             : (
                                 noUserSearch ?
                                     <h1> {noUserSearch}</h1>
                                     :
-                                    <ShowUsersArray users={filteredUsers} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange} />
+                                    <ShowUsersArray
+                                        users={filteredUsers}
+                                        token={props.token}
+                                        interactionChange={interactionChange} setInteractionChange={setInteractionChange}
+                                    />
                             )
 
                         }
