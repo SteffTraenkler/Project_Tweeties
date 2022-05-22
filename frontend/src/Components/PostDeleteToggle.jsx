@@ -2,10 +2,11 @@ import { useState } from "react";
 import { apiBaseUrl } from "../api/api";
 import { useProfileInfo } from "../hooks/useProfileInfo";
 import DeleteTweetIcon from "./../assets/icons/tweeties/DeleteTweetIcon.png"
+import ModalDelPost from "./ModalDelPost";
 
 export default function PostDeleteToggle(props) {
     const [postActive, setPostActive] = useState(false)
-
+    const [delModal, setDelModal] = useState(false)
     const profileInfo = useProfileInfo(props.token)
 
     const profileInfoID = profileInfo === null ? "ProfileInfo not fetched" : profileInfo._id
@@ -39,6 +40,14 @@ export default function PostDeleteToggle(props) {
 
     return (
         <div>
+            {delModal &&
+                <ModalDelPost token={props.token}
+                    post={props.post}
+                    setDelModal={setDelModal}
+                    setPostActive={setPostActive}
+                    interactionChange={props.interactionChange}
+                    setInteractionChange={props.setInteractionChange}
+                />}
             <div className="postToggleDeleteFollow" onClick={togglePostMore}>
                 <img src={DeleteTweetIcon} alt="Post Show more" />
             </div>
@@ -48,7 +57,11 @@ export default function PostDeleteToggle(props) {
                     {profileInfoID ?
                         (profileInfoID === props.post.postedBy._id ?
                             <div>
-                                <h2>Tweet löschen</h2>
+                                <h2
+                                    onClick={() => { setDelModal(true); setPostActive(false) }}
+                                >Tweet löschen
+                                </h2>
+
                             </div>
                             : (props.post.postedBy.youFollow ?
                                 <div className="unfollowBtn" onClick={e => followUser(e, props.post.postedBy._id)}>
