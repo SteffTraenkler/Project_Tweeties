@@ -64,7 +64,8 @@ postsRouter.post("/add",
     }
 )
 
-postsRouter.delete("/delete/post:postId", doAuthMiddleware, async (req, res) => {
+postsRouter.delete("/delete/post/:postId", doAuthMiddleware, async (req, res) => {
+    console.log("test delete");
     try {
         const postId = req.params.postId
         const userViewsId = req.userClaims.sub

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { apiBaseUrl } from "../../api/api";
 import Post from "../../Components/Post";
 import "../../styles/postDetails.css"
@@ -11,6 +11,7 @@ import {
     ShareInteraction,
 } from "../../Components/PostInteraction";
 import birdLogo from "../../assets/img/Birdie.png";
+import PostDeleteToggle from "../../Components/PostDeleteToggle";
 
 export default function PostDetail(props) {
     const { postId } = useParams();
@@ -19,6 +20,8 @@ export default function PostDetail(props) {
     const [interactionChange, setInteractionChange] = useState(false);
 
     const [error, setError] = useState("");
+
+    const navigate = useNavigate()
 
     console.log("beforeUseeffect");
 
@@ -40,13 +43,25 @@ export default function PostDetail(props) {
             });
     }, [props.token, postId, interactionChange]);
 
+
+    function goBackOnClick() {
+        navigate(-1)
+    }
+
+
     console.log("SinglePost", post);
     return (
         <div>
             {error ? (
-                <h1 className="errorMsg">{error}</h1>
+                <div>
+                    <h1 className="errorMsg">Dieser Tweet existiert nicht mehr...</h1>
+                    <h2 onClick={goBackOnClick}>Go Back</h2>
+                </div>
             ) : post ? (
                 <div className="postDetailDiv">
+
+                    <PostDeleteToggle post={post} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange} />
+
                     <Post post={post} token={props.token} />
                     {post.likes || post.retweets || post.quotedTweets ? (
                         <div className="countPostInteraktionsDiv">

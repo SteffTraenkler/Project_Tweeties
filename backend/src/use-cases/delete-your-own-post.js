@@ -7,15 +7,18 @@ async function deleteYourPost({ postId, userViewsId }) {
         throw new Error("Post doesn't exist anymore...")
     }
 
-    const userId = post.postedBy._id
+    console.log("postObjekt", post);
+
+    const userId = post.postedBy
 
     const postOwner = userId === userViewsId
+
 
     if (!postOwner) {
         throw new Error("User has no right to delete!!")
     }
 
-    const deletedPost = await PostDAO.deletePost(post)
+    const deletedPost = await PostDAO.deletePost(post._id)
 
     return deletedPost
 }
