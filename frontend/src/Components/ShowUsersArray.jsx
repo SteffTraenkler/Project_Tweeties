@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { apiBaseUrl } from "../api/api"
-import { useProfileInfo } from "../hooks/useProfileInfo"
 import "../styles/postDetails.css"
 
 export default function ShowUsersArray(props) {
 
-    const profileInfo = useProfileInfo(props.token)
+    const profileInfo = props.profileInfo
 
     const profileInfoID = profileInfo === null ? "ProfileInfo not fetched" : profileInfo._id
 

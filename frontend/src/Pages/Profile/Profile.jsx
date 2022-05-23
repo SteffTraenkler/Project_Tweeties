@@ -1,9 +1,9 @@
 import PostList from "../../Components/PostList";
-import { useProfileInfo } from "../../hooks/useProfileInfo";
 import "../../styles/userDetail.css"
+import postTweet from "../../assets/icons/tweet&mess/Add text icon.png";
 
 const { useState, useEffect } = require("react");
-const { useParams, Link } = require("react-router-dom");
+const { useParams, Link, useNavigate } = require("react-router-dom");
 const { apiBaseUrl } = require("../../api/api");
 
 const Profile = (props) => {
@@ -13,8 +13,8 @@ const Profile = (props) => {
   const [error, setError] = useState("");
 
   const [interactionChange, setInteractionChange] = useState(false);
+  const profileInfo = props.profileInfo
 
-  const profileInfo = useProfileInfo(props.token)
 
   useEffect(() => {
     fetch(apiBaseUrl + "/api/users/profile/" + userId, {
@@ -28,19 +28,13 @@ const Profile = (props) => {
           setError(data.err.message);
           return;
         }
-        console.log(data);
         setUser(data);
       });
   }, [userId, props.token, interactionChange]);
 
-  console.log("user", user);
   let userID = user ? user._id : "user not yet fetched"
   let profileInfoID = profileInfo === null ? "ProfileInfo not fetched" : profileInfo._id
 
-  console.log("userID", userID);
-  console.log("ProfileInfoID", profileInfoID);
-
-  //USer
   const followUser = (event) => {
     event.preventDefault()
 
@@ -57,6 +51,10 @@ const Profile = (props) => {
           : setInteractionChange(true)
       })
   }
+
+  const navigate = useNavigate()
+
+  const createNewTweet = () => navigate("/addPost");
 
   return (
     <div token={props.token}>
@@ -124,6 +122,7 @@ const Profile = (props) => {
             token={props.token}
             setInteractionChange={setInteractionChange}
             interactionChange={interactionChange}
+            profileInfo={props.profileInfo}
           />
           {/* <div>
             {user.posts.map((post, index) => (
@@ -142,6 +141,17 @@ const Profile = (props) => {
       ) : (
         <h2>Loading ...</h2>
       )}
+      <div
+        className="addTweet-btn"
+        onClick={createNewTweet}
+        style={{
+          backgroundImage: `url(${postTweet})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* <img className="addTweet" src={postTweet} alt="" /> */}
+      </div>
     </div>
   );
 };

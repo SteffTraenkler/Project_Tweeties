@@ -21,11 +21,9 @@ export default function ShowUserLiked(props) {
             .then((resp) => resp.json())
             .then((userArrResult) => {
                 if (userArrResult.err) {
-                    console.log("Error fetching User who liked Post Array", userArrResult.err);
                     setError(userArrResult.err.message)
                     return
                 }
-                console.log("UserArray who like Post:", userArrResult);
                 setUsers(userArrResult)
             })
     }, [interactionChange, props.token])
@@ -39,13 +37,15 @@ export default function ShowUserLiked(props) {
     return (
         <>
             {error ?
-                <h2>{error}</h2>
+                <h2 className="noUser">{error}</h2>
                 : (<div>
                     <div className="backFlex">
                         <p onClick={goBackOnClick}><img className="backArrow" src={ArrowBack} alt="" /></p>
                         <h1 className="rtdFrom">Liked von</h1>
                     </div>
-                    <ShowUsersArray users={users} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange} />
+                    <ShowUsersArray users={users} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange}
+                        profileInfo={props.profileInfo}
+                    />
                 </div>)
             }
         </>

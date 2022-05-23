@@ -38,7 +38,7 @@ export default function ShowUsersWhoFollow(props) {
 
     return (
         <>{error ?
-            <h2> {error}</h2>
+            <h2 className="noUser"> {error}</h2>
             : (
                 <div>
                     <div className="backFlex">
@@ -48,7 +48,9 @@ export default function ShowUsersWhoFollow(props) {
                     {noUser ?
                         <h1> {noUser}</h1>
                         :
-                        <ShowUsersArray users={users} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange} />}
+                        <ShowUsersArray users={users} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange}
+                            profileInfo={props.profileInfo}
+                        />}
                 </div>
             )
         }

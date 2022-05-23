@@ -4,6 +4,8 @@ import { apiBaseUrl } from "../../api/api";
 import Post from "../../Components/Post";
 import "../../styles/postDetails.css"
 import ArrowBack from "../../assets/icons/Arrow1.png";
+import postTweet from "../../assets/icons/tweet&mess/Add text icon.png";
+import { Triangle } from "react-loader-spinner";
 
 import {
     CommentInteraction,
@@ -24,8 +26,6 @@ export default function PostDetail(props) {
 
     const navigate = useNavigate()
 
-    console.log("beforeUseeffect");
-
     useEffect(() => {
         fetch(apiBaseUrl + "/api/posts/" + postId, {
             headers: {
@@ -35,18 +35,15 @@ export default function PostDetail(props) {
             .then((resp) => resp.json())
             .then((postResult) => {
                 if (postResult.err) {
-                    console.log("Error", postResult.err);
                     setError(postResult.err.message);
                     return;
                 }
-                console.log("Post", postResult);
                 setPost(postResult);
             });
     }, [props.token, postId, interactionChange]);
 
+    const createNewTweet = () => navigate("/addPost");
 
-
-    console.log("SinglePost", post);
     return (
         <div>
             {error ? (
@@ -59,12 +56,13 @@ export default function PostDetail(props) {
             ) : post ? (
                 <div className="postDetailDiv">
 
-                    <PostDeleteToggle post={post} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange} />
+                    <PostDeleteToggle post={post} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange}
+                        profileInfo={props.profileInfo}
+                    />
 
                     <Post post={post} token={props.token} />
                     {post.likes || post.retweets || post.quotedTweets ? (
                         <div className="countPostInteraktionsDiv">
-                            {/* onclick on the p tags with each a function!! */}
                             {post.retweets.length > 0 ? (
                                 <Link to={"/secure/home/post/retweets/" + post._id}>
                                     <p>{post.retweets.length}
@@ -117,13 +115,25 @@ export default function PostDetail(props) {
             ) : (
                 <div className="pagePicLoader">
                     {" "}
-                    <img
-                        className="twitterLoadingPic"
-                        src={birdLogo}
-                        alt="birdLogo"
-                    />{" "}
+                    <div className="twitterLoading fade-out">
+                        <Triangle height="300" width="300" color="#fff" ariaLabel="Loading" />
+                        <img className="twitterLoadingPic" src={birdLogo} alt="picturePic" />
+                    </div>{" "}
                 </div>
             )}
+            <div className="posRela">
+                <div
+                    className="addTweet-btn"
+                    onClick={createNewTweet}
+                    style={{
+                        backgroundImage: `url(${postTweet})`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                    }}
+                >
+                    {/* <img className="addTweet" src={postTweet} alt="" /> */}
+                </div>
+            </div>
         </div>
     );
 }

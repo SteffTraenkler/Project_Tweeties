@@ -20,10 +20,6 @@ function sendEmail(options) {
 
         const messageHtml = options.html || message.replace("\n", "<br/>") // usally replaceAll() could be a reason cauze of older chrosme version maybe
 
-        console.log("message after", message);
-
-        console.log("messageHtml", messageHtml);
-
         transporter.sendMail({
             from: '"Twitter Team" <supercoderpro@gmail.com>',
             to,
@@ -46,5 +42,5 @@ function sendEmail(options) {
 }
 
 module.exports = {
-        sendEmail
-    }
+    sendEmail
+}

@@ -50,7 +50,6 @@ userRouter.get("/myProfileInfo", doAuthMiddleware, async (req, res) => {
 userRouter.get("/profile/:username", doAuthMiddleware, async (req, res) => {
   try {
     const username = req.params.username;
-    console.log("username from profil:username", username);
 
     const allUsers = await UserService.showUser({ username }, req.userClaims.sub);
 
@@ -68,14 +67,7 @@ userRouter.get("/profile/:username", doAuthMiddleware, async (req, res) => {
 userRouter.put("/profile/editProfile", doAuthMiddleware, pictureUploardMiddleware, async (req, res) => {
   try {
     const userId = req.userClaims.sub;
-    console.log("username from ProfileEdit", userId);
 
-    // const profilePictureBase64 = imageBufferToBase64(req.file.buffer, req.file.mimetype)
-
-    // const ProfileEditInfo = {
-    //   ...req.body,
-    //   profilePicture: imageBufferToBase64(req.file.buffer, req.file.mimetype)
-    // }
 
     const profileEditInfo = req.body
     if(req.file) {
@@ -88,9 +80,10 @@ userRouter.put("/profile/editProfile", doAuthMiddleware, pictureUploardMiddlewar
     console.log(req.body);
     console.log(req.file);
 
+
     res.status(200).json(allEdits)
   } catch (err) {
-    console.log("erro catch inside editProfile Route", err);
+    console.log("error catch inside editProfile Route", err);
     res.status(500).json(
       {
         err: {
