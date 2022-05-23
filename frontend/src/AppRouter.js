@@ -50,7 +50,7 @@ function AppRoutes() {
 
         <Route path="user/:userId" element={<Profile token={token} />} />
 
-        <Route path="user/editProfile/:userId" element={<EditProfile token={token} />}/>
+        <Route path="user/editProfile/:userId" element={<EditProfile token={token} />} />
 
         <Route path="users/following/:userId" element={<ShowUsersFollowed token={token} />} />
         <Route path="users/follower/:userId" element={<ShowUsersWhoFollow token={token} />} />
@@ -59,23 +59,7 @@ function AppRoutes() {
 
 
       </Route>
-      {/* /> */}
-      {/* <Route
-        path="/home"
-        element={
-          <AuthRequired token={token} setToken={setToken}>
-            <Home token={token} />
-          </AuthRequired>
-        }
-      /> */}
-      {/* <Route
-        path="/user/:userId"
-        element={
-          <AuthRequired token={token} setToken={setToken}>
-            <Profile token={token} />
-          </AuthRequired>
-        }
-      /> */}
+
       <Route
         path="/addPost"
         element={
