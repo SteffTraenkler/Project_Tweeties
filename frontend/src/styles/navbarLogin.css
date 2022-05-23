@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: repeat(3, auto);
   border-bottom: 2px #1da1f2 solid;
-  border-bottom-left-radius:30%;
-  border-bottom-right-radius:30%;
+  border-bottom-left-radius:30px;
+  border-bottom-right-radius:30px;
 }
 .birdie .bird {
   grid-column: 2/3;

@@ -109,3 +109,26 @@
 .iconInteractionBarDiv img {
   width: 80%;
 }
+.postToggleDeleteFollow{
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 10px 0 0;
+}
+.postToggleDeleteFollow img{
+width: 14px;
+}
+.unfollowButton, .followButton, .deletePost{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+  margin-bottom: -20px;
+  z-index: 3;
+}
+
+.unfollowButton p, .followButton p, .deletePost p{
+  border: 1px solid #1da1f2;
+  border-radius:15px;
+  background-color: #1da1f2;
+  color: #fff;
+  padding: 3px;
+}
