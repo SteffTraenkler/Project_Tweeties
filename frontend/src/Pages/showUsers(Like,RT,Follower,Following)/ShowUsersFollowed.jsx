@@ -21,7 +21,6 @@ export default function ShowUsersFollowed(props) {
             .then((resp) => resp.json())
             .then((userArrResult) => {
                 if (userArrResult.err) {
-                    console.log("error", userArrResult.err.message);
                     setError(userArrResult.err.message)
                     return
                 }
@@ -48,7 +47,9 @@ export default function ShowUsersFollowed(props) {
                     {noUser ?
                         <h1> {noUser}</h1>
                         :
-                        <ShowUsersArray users={users} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange} />}
+                        <ShowUsersArray users={users} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange}
+                            profileInfo={props.profileInfo}
+                        />}
                 </div>
             )
         }

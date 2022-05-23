@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { apiBaseUrl } from "../../api/api";
-import { useProfileInfo } from "../../hooks/useProfileInfo"
 import Camera from "../../assets/icons/CameraIcon.png"
 import "../../styles/profileEdit.css"
 
 export default function EditProfile(props) {
 
-    const profileInfo = useProfileInfo(props.token)
+    const profileInfo = props.profileInfo
 
     const [profilepicture, setProfilePicture] = useState();
     const [newUsername, setNewUsername] = useState("");
@@ -26,7 +25,6 @@ export default function EditProfile(props) {
 
     useEffect(() => {
         if (profilepicture) {
-            console.log("useEffect imgPreview");
             const imgreader = new FileReader();
             imgreader.onloadend = () => {
                 setImgPreview(imgreader.result)
@@ -42,10 +40,6 @@ export default function EditProfile(props) {
     const editProfile = (event) => {
         event.preventDefault();
 
-        console.log("newusername", newUsername);
-        console.log("pic", profilepicture);
-        console.log("newBio", newBio);
-
         if (!profilepicture && !newUsername && !newBio) {
             setError("Nothing to change")
             return
@@ -55,7 +49,6 @@ export default function EditProfile(props) {
 
         if (profilepicture) {
             formData.set("profilePicture", profilepicture, profilepicture.name)
-            console.log("profilepicture+name", profilepicture.name);
         }
 
         if (newUsername) {
@@ -75,8 +68,6 @@ export default function EditProfile(props) {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log("data", data);
-                console.log("data err", data.err);
                 if (data._id && (data.newUsername || data.newBio || data.profilePicture)) {
                     navigate("/secure/home")
                     return;
@@ -85,10 +76,6 @@ export default function EditProfile(props) {
                 // setError(data.err.message)
             })
     }
-
-    console.log("newusername", newUsername);
-    console.log("pic", profilepicture);
-    console.log("newBio", newBio);
 
     return (
         <section>

@@ -36,9 +36,6 @@ export default function SearchUsers(props) {
             return value.username.toLowerCase().includes(searchedWord.toLowerCase())
         })
 
-        console.log("SearchedWORD", searchedWord);
-        console.log("NFILTER", nFilter);
-
         if (searchedWord === "") {
             setFilteredUsers([])
         } else {
@@ -58,9 +55,6 @@ export default function SearchUsers(props) {
     const errorHandlingAll = allUsers ? (allUsers.length === 0 ? noUser = "There is currently no one here :/" : noUser) : "users not fetched yet"
     let noUserSearch
     const errorHandlingSearch = filteredUsers ? (filteredUsers.length === 0 ? noUserSearch = "Leider konnten wir keine User mit diesem Namen finden :/" : noUserSearch) : "users not fetched yet"
-
-    console.log("FILTEREDUSERS", filteredUsers);
-    console.log("allUsers", allUsers);
 
     return (
         <>
@@ -85,6 +79,7 @@ export default function SearchUsers(props) {
                                         users={allUsers}
                                         token={props.token}
                                         interactionChange={interactionChange} setInteractionChange={setInteractionChange}
+                                        profileInfo={props.profileInfo}
                                     />
                             )
                             : (
@@ -95,6 +90,7 @@ export default function SearchUsers(props) {
                                         users={filteredUsers}
                                         token={props.token}
                                         interactionChange={interactionChange} setInteractionChange={setInteractionChange}
+                                        profileInfo={props.profileInfo}
                                     />
                             )
 
