@@ -69,9 +69,11 @@ export default function EditProfile(props) {
             .then((response) => response.json())
             .then((data) => {
                 if (data._id && (data.newUsername || data.newBio || data.profilePicture)) {
-                    navigate("/secure/home")
                     return;
                 }
+                console.log(profileInfo.username);
+                navigate("/secure/home/user/" + profileInfo.username)
+
                 // console.log(data.err.message);
                 // setError(data.err.message)
             })
