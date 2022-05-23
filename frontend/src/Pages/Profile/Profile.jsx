@@ -69,7 +69,7 @@ const Profile = (props) => {
             <div>
               {profileInfoID === userID ?
                 <div className="buttonProfileEdit">
-                  <p>Profil bearbeiten</p>
+                  <Link to={"/secure/home/user/editProfile/" + userId}><p>Profil bearbeiten</p></Link>
                 </div>
                 : (user.youFollow ?
                   <div className="buttonUnfollow" onClick={followUser}>
@@ -111,7 +111,7 @@ const Profile = (props) => {
                 <p>Folge ich</p>
               </div>
             </Link>
-             <Link to={"/secure/home/users/follower/" + user._id}>
+            <Link to={"/secure/home/users/follower/" + user._id}>
               <div className="littleFlex">
                 <p>{user.follower.length}</p>
                 <p>Follower</p>

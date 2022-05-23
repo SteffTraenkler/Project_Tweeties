@@ -66,6 +66,8 @@ userRouter.put("/profile/editProfile", doAuthMiddleware, async (req, res) => {
     console.log("username from ProfileEdit", userId);
     const allEdits = await UserService.editProfile(userId, req.body)
 
+    console.log(req.body);
+    
     res.status(200).json(allEdits)
   } catch (err) {
     console.log("erro catch inside editProfile Route", err);

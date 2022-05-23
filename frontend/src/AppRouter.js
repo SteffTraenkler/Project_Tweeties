@@ -16,6 +16,7 @@ import ShowUserRTd from "./Pages/showUsers(Like,RT,Follower,Following)/ShowUserR
 import ShowUsersFollowed from "./Pages/showUsers(Like,RT,Follower,Following)/ShowUsersFollowed";
 import ShowUsersWhoFollow from "./Pages/showUsers(Like,RT,Follower,Following)/ShowUsersWhoFollow";
 import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
+import EditProfile from "./Pages/Profile/ProfileEdit";
 
 function AppRoutes() {
   const [token, setToken] = useState(null);
@@ -48,6 +49,9 @@ function AppRoutes() {
         <Route path="post/retweets/:postId" element={<ShowUserRTd token={token} />} />
 
         <Route path="user/:userId" element={<Profile token={token} />} />
+
+        <Route path="user/editProfile/:userId" element={<EditProfile token={token} />}/>
+
         <Route path="users/following/:userId" element={<ShowUsersFollowed token={token} />} />
         <Route path="users/follower/:userId" element={<ShowUsersWhoFollow token={token} />} />
         <Route path="user/searchUsers" element={<SearchUsers token={token} />} />
