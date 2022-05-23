@@ -52,7 +52,7 @@ const VerifyEmailForm = (props) => {
                         <input value={sixDigitCode} onChange={(e) => setSixDigitCode(e.target.value)} type="email" placeholder="123456" />
                         <label htmlFor="floatingInput">Verification Code</label>
                     </div>
-                    <button onClick={verifyAccount} type="submit">Account Verifizieren</button>
+                    <a onClick={verifyAccount} type="submit">Account Verifizieren</a>
                     {error && <p>Das hier ist ein error {error}</p>}
                 </form>}
         </div>

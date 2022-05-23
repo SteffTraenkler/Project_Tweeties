@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { apiBaseUrl } from "../../api/api";
 import Post from "../../Components/Post";
 import "../../styles/postDetails.css"
+import ArrowBack from "../../assets/icons/Arrow1.png";
 
 import {
     CommentInteraction,
@@ -44,18 +45,16 @@ export default function PostDetail(props) {
     }, [props.token, postId, interactionChange]);
 
 
-    function goBackOnClick() {
-        navigate(-1)
-    }
-
 
     console.log("SinglePost", post);
     return (
         <div>
             {error ? (
-                <div>
+                <div className="noTweet">
+                    <a className="backButton" onClick={() => navigate(-1)}>
+                        <img src={ArrowBack} />
+                    </a>
                     <h1 className="errorMsg">Dieser Tweet existiert nicht mehr...</h1>
-                    <h2 onClick={goBackOnClick}>Go Back</h2>
                 </div>
             ) : post ? (
                 <div className="postDetailDiv">

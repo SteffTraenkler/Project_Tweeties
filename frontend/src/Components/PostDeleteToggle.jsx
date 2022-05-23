@@ -56,18 +56,18 @@ export default function PostDeleteToggle(props) {
                 < div >
                     {profileInfoID ?
                         (profileInfoID === props.post.postedBy._id ?
-                            <div>
-                                <h2
+                            <div className="deletePost">
+                                <p
                                     onClick={() => { setDelModal(true); setPostActive(false) }}
                                 >Tweet löschen
-                                </h2>
+                                </p>
 
                             </div>
                             : (props.post.postedBy.youFollow ?
-                                <div className="unfollowBtn" onClick={e => followUser(e, props.post.postedBy._id)}>
+                                <div className="unfollowButton" onClick={e => followUser(e, props.post.postedBy._id)}>
                                     <p>Entfolgen</p>
                                 </div>
-                                : <div className="followBtn" onClick={e => followUser(e, props.post.postedBy._id)}>
+                                : <div className="followButton" onClick={e => followUser(e, props.post.postedBy._id)}>
                                     <p>Folgen</p>
                                 </div>)
                         )

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import VerifyEmailForm from './VerifyEmailForm'
+import Birdie from "../../assets/img/Birdie.png";
 
 function VerifyEmail() {
 
@@ -14,14 +15,13 @@ function VerifyEmail() {
     return (
         <div>
             <div>
-                <div>
-                    <img src="" alt="" />
-                    <h4>Twitter</h4>
+                <div className='verfifyTxt'>
+                    <img src={Birdie} alt="" />
                     {!userWasVerified && <div>Schritt 2 - E-mail verifizieren</div>}
                     <h5>{message}</h5>{console.log(message)}
                 </div>
 
-                <div>
+                <div className='backToLogin'>
                     <VerifyEmailForm
                         userWasVerified={userWasVerified}
                         userVerificationSuccessfull={userVerificationSuccessfull}

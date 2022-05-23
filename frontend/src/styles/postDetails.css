@@ -58,3 +58,13 @@ align-items: center;
 font-size: 0.7em;
 text-align: center;
 }
+.errorMsg{
+  text-align: center;
+  vertical-align: bottom;
+}
+.noTweet{
+  display: flex;
+}
+.backButton img{
+  padding: 10px 0 0 10px;
+}

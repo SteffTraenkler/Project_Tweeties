@@ -122,3 +122,20 @@ button[type="button"] {
   padding-top: 5%;
   font-size: 3vw;
 }
+
+.verfifyTxt{
+  text-align: center;
+}
+.verfifyTxt img{
+  margin-top: 10px;
+}
+.backToLogin{
+  text-align: center;
+}
+.backToLogin button{
+  background-color: #1da1f2;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  padding: 5px;
+}
