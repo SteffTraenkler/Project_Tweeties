@@ -42,7 +42,9 @@ export default function ShowUserRTd(props) {
                     <p onClick={goBackOnClick}><img className="backArrow" src={ArrowBack} alt="" /></p>
                     <h1 className="rtdFrom">Retweetet von</h1>
                 </div>
-                <ShowUsersArray users={users} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange} />
+                <ShowUsersArray users={users} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange}
+                    profileInfo={props.profileInfo}
+                />
             </div>)
         }
 

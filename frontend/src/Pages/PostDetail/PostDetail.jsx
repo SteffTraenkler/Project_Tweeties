@@ -24,8 +24,6 @@ export default function PostDetail(props) {
 
     const navigate = useNavigate()
 
-    console.log("beforeUseeffect");
-
     useEffect(() => {
         fetch(apiBaseUrl + "/api/posts/" + postId, {
             headers: {
@@ -35,18 +33,14 @@ export default function PostDetail(props) {
             .then((resp) => resp.json())
             .then((postResult) => {
                 if (postResult.err) {
-                    console.log("Error", postResult.err);
                     setError(postResult.err.message);
                     return;
                 }
-                console.log("Post", postResult);
                 setPost(postResult);
             });
     }, [props.token, postId, interactionChange]);
 
 
-
-    console.log("SinglePost", post);
     return (
         <div>
             {error ? (
@@ -59,12 +53,13 @@ export default function PostDetail(props) {
             ) : post ? (
                 <div className="postDetailDiv">
 
-                    <PostDeleteToggle post={post} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange} />
+                    <PostDeleteToggle post={post} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange}
+                        profileInfo={props.profileInfo}
+                    />
 
                     <Post post={post} token={props.token} />
                     {post.likes || post.retweets || post.quotedTweets ? (
                         <div className="countPostInteraktionsDiv">
-                            {/* onclick on the p tags with each a function!! */}
                             {post.retweets.length > 0 ? (
                                 <Link to={"/secure/home/post/retweets/" + post._id}>
                                     <p>{post.retweets.length}

@@ -18,7 +18,7 @@ function VerifyEmail() {
                 <div className='verfifyTxt'>
                     <img src={Birdie} alt="" />
                     {!userWasVerified && <div>Schritt 2 - E-mail verifizieren</div>}
-                    <h5>{message}</h5>{console.log(message)}
+                    <h5>{message}</h5>
                 </div>
 
                 <div className='backToLogin'>

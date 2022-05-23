@@ -9,7 +9,7 @@ export default function ProtectedContent(props) {
         <div>
 
             <NavbarMain
-                token={props.token}
+                token={props.token} profileInfo={props.profileInfo}
             />
 
             <Outlet />

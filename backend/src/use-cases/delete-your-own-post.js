@@ -7,8 +7,6 @@ async function deleteYourPost({ postId, userViewsId }) {
         throw new Error("Post doesn't exist anymore...")
     }
 
-    console.log("postObjekt", post);
-
     const userId = post.postedBy
 
     const postOwner = userId === userViewsId

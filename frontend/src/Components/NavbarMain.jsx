@@ -5,19 +5,14 @@ import Birdie from "../assets/img/Birdie.png";
 import "../styles/navbarMain.css";
 import "../styles/Sidebar.css";
 import { SidebarData } from "./SlidebarData";
-import { useProfileInfo } from "../hooks/useProfileInfo";
 
 export const NavbarMain = (props) => {
-  // let navigate = useNavigate();
+
   const [sidebar, setSidebar] = useState(false)
 
   const showSidebar = () => setSidebar(!sidebar)
 
-  const profileInfo = useProfileInfo(props.token);
-
-  console.log("profileInfo", profileInfo);
-
-  // const profileLink = "/secure/home/user/" + profileInfo.username
+  const profileInfo = props.profileInfo;
 
   return (
     <>

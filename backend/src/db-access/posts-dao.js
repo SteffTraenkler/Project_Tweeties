@@ -64,7 +64,7 @@ async function likePost(postId, userId) {
     })
 
     if (checkIfUserLiked) {
-        console.log("trying to remove like");
+        ;
         const removeResult = await db.collection("posts").updateOne(
             { _id: new ObjectId(postId) },
             { $pull: { likes: { userId: userId } } }  //elemMatch -> bei Objekt  -> funktioniert nicht lol. Kann keine ID aus einem Objekt lesen und beide rausnehmen

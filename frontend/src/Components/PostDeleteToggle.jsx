@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { apiBaseUrl } from "../api/api";
-import { useProfileInfo } from "../hooks/useProfileInfo";
 import DeleteTweetIcon from "./../assets/icons/tweeties/DeleteTweetIcon.png"
 import ModalDelPost from "./ModalDelPost";
 
 export default function PostDeleteToggle(props) {
     const [postActive, setPostActive] = useState(false)
     const [delModal, setDelModal] = useState(false)
-    const profileInfo = useProfileInfo(props.token)
+    const profileInfo = props.profileInfo
 
     const profileInfoID = profileInfo === null ? "ProfileInfo not fetched" : profileInfo._id
 
@@ -35,8 +34,6 @@ export default function PostDeleteToggle(props) {
                     : props.setInteractionChange(true)
             })
     }
-
-    // console.log("YourFollow?", props.post.postedBy.youFollow);
 
     return (
         <div>

@@ -21,7 +21,6 @@ const LikeInteraction = (props) => {
         props.interactionChange
           ? props.setInteractionChange(false)
           : props.setInteractionChange(true);
-        console.log("likeToggle used...", data);
       });
   };
 
@@ -58,7 +57,6 @@ const RetweetInteraction = (props) => {
         props.interactionChange
           ? props.setInteractionChange(false)
           : props.setInteractionChange(true)
-        console.log("rt toggle used", data);
       })
   }
   return (
