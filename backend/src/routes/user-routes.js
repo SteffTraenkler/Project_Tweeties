@@ -1,9 +1,14 @@
 const express = require("express");
+const multer = require("multer")
 
 const { body } = require("express-validator");
 const { doAuthMiddleware } = require("../auth/doAuthMiddleware");
 const { doValidations } = require("../facade/doValidations");
 const { UserService } = require("../use-cases");
+const { imageBufferToBase64 } = require("../utils/hash");
+const pictureUploardMiddleware =  multer().single("profilePicture")
+
+
 
 const userRouter = express.Router();
 
@@ -59,10 +64,22 @@ userRouter.get("/profile/:username", doAuthMiddleware, async (req, res) => {
   }
 });
 
-userRouter.put("/profile/editProfile", doAuthMiddleware, async (req, res) => {
+userRouter.put("/profile/editProfile", doAuthMiddleware, pictureUploardMiddleware, async (req, res) => {
   try {
     const userId = req.userClaims.sub;
-    const allEdits = await UserService.editProfile(userId, req.body)
+
+
+    const profileEditInfo = req.body
+    if(req.file) {
+    profileEditInfo.profilePicture = imageBufferToBase64(req.file.buffer, req.file.mimetype)
+}
+
+    const allEdits = await UserService.editProfile(userId, req.body, profileEditInfo)
+    
+
+    console.log(req.body);
+    console.log(req.file);
+
 
     res.status(200).json(allEdits)
   } catch (err) {

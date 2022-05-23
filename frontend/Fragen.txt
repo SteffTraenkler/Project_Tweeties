@@ -1,2 +1,18 @@
-Fragen Steff:
-.env ignorieren ausschalten auf das wir alle zugriff auf die datenbank haben wenn okey
+
+const profilePictureBase64 = imageBufferToBase64(req.file.buffer, req.file.mimetype) // <Buffer 18 fe 39 49 29 /> ---> "data:image/png;base64,X902j2ßdjeß2j2309..."
+const profileEditInfo = { 
+    ...req.body,
+    profilePicture: imageBufferToBase64(req.file.buffer, req.file.mimetype)
+}
+
+
+// ODER
+
+
+const profileEditInfo = req.body
+if(req.file) {
+    profileEditInfo.profilePicture = imageBufferToBase64(req.file.buffer, req.file.mimetype)
+}
+
+const updateResult = ProfileService.edit(profileEditInfo)
+res.status(200).json(updateResult)
