@@ -81,7 +81,6 @@ async function followUser(yourUserId, targetUserId) {
                 { $pull: { following: targetUserId } }
             )
         ])
-        console.log("removeResult", removeResult);
         return removeResult
     }
 
@@ -96,7 +95,7 @@ async function followUser(yourUserId, targetUserId) {
                 { $push: { following: targetUserId } }
             )
         ])
-        console.log("insertionResult", insertionResult);
+
         return insertionResult
     }
 }

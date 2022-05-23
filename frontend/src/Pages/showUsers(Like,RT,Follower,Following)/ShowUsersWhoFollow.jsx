@@ -48,7 +48,9 @@ export default function ShowUsersWhoFollow(props) {
                     {noUser ?
                         <h1> {noUser}</h1>
                         :
-                        <ShowUsersArray users={users} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange} />}
+                        <ShowUsersArray users={users} token={props.token} interactionChange={interactionChange} setInteractionChange={setInteractionChange}
+                            profileInfo={props.profileInfo}
+                        />}
                 </div>
             )
         }

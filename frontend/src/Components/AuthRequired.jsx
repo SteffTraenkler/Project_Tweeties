@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { Navigate } from "react-router-dom";
 import { apiBaseUrl } from "../api/api";
 
 const AuthRequired = (props) => {
@@ -22,7 +21,6 @@ const AuthRequired = (props) => {
       .then((response) => response.json())
       .then((data) => {
         setLoading(false);
-        console.log(data);
         if (data.token) {
           props.setToken(data.token);
         }

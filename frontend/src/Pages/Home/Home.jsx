@@ -8,10 +8,13 @@ import "../../styles/home.css";
 
 export const Home = (props) => {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   const [interactionChange, setInteractionChange] = useState(false)
 
   const navigate = useNavigate()
+
+  const profileInfo = props.profileInfo
 
 
   useEffect(() => {
@@ -27,28 +30,31 @@ export const Home = (props) => {
         } else {
           setPosts(data);
         }
+        setLoading(false)
       });
   }, [interactionChange]);
 
   const createNewTweet = () => navigate("/addPost");
 
+  console.log(profileInfo);
+
   return (
     <div>
-      {/* <aside>
-        <p>
-        Modal-Fenster Component
-        </p>
-      </aside> */}
       <article className="newPost">
-        {/* Post add- Component */}
-
-        {posts.length === 0 ? (
-          <h2 className="noPost">
-            Sorry 😧, your feed is currently empty... Add your first post!
-          </h2>
-        ) : (
-          <PostList posts={posts} token={props.token} setInteractionChange={setInteractionChange} interactionChange={interactionChange} />
-        )}
+        {loading ? (
+          <h1>Loading....</h1>
+        )
+          : (
+            posts.length === 0 ? (
+              <h2 className="noPost">
+                Sorry 😧, your feed is currently empty... Add your first post!
+              </h2>
+            ) : (
+              <PostList posts={posts} token={props.token} setInteractionChange={setInteractionChange} interactionChange={interactionChange}
+                profileInfo={props.profileInfo}
+              />
+            )
+          )}
       </article>
       <div className="posRela">
         <div
@@ -64,6 +70,7 @@ export const Home = (props) => {
         </div>
       </div>
     </div>
+
   );
 };
 

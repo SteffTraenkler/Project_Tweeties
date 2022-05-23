@@ -10,7 +10,6 @@ import "../styles/postInteraction.css";
 import PostDeleteToggle from "./PostDeleteToggle";
 
 export default function PostList(props) {
-    console.log(props.posts);
 
     return (
         <div className="postFeedListDiv">
@@ -18,7 +17,9 @@ export default function PostList(props) {
                 return (
                     <div key={key}>
 
-                        <PostDeleteToggle post={post} token={props.token} interactionChange={props.interactionChange} setInteractionChange={props.setInteractionChange} />
+                        <PostDeleteToggle post={post} token={props.token} interactionChange={props.interactionChange} setInteractionChange={props.setInteractionChange}
+                            profileInfo={props.profileInfo}
+                        />
 
 
                         <Link to={"/secure/home/post/" + post._id} >

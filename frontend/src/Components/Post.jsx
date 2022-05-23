@@ -34,12 +34,6 @@ export default function Post(props) {
           )}
         </div>
       </div>
-      {/* <div className='iconInteractionBarDiv'>
-                <div><img src={CommentIcon} alt="Link to comment this tweet" /></div>
-                <div><img src={RetweetIcon} alt="Link to Retweet this Tweet" /></div>
-                <div><img src={LikeIcon} alt="Link to like thi post / Tweet" /></div>
-                <div><img src={ShareIcon} alt="Link to share this post / Tweet" /></div>
-            </div> */}
     </div >
   );
 }

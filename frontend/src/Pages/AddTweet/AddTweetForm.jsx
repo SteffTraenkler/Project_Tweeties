@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiBaseUrl } from "../../api/api";
-import { useProfileInfo } from "../../hooks/useProfileInfo";
+
 import Camera from "../../assets/icons/CameraIcon.png";
 import "../../styles/addTweet.css";
 
@@ -15,12 +15,11 @@ export default function AddTweetForm(props) {
 
   const navigate = useNavigate(); //navigate back to home after posting, reset states (also, let the page slide down?)
 
-  const profileInfo = useProfileInfo(props.token); //used to display ProfileAvatar
+  const profileInfo = props.profileInfo; //used to display ProfileAvatar
 
   //Image Preview
   useEffect(() => {
     if (picture) {
-      console.log("useEffect impPreview");
       const imgreader = new FileReader();
       imgreader.onloadend = () => {
         setImgPreview(imgreader.result);
@@ -67,11 +66,6 @@ export default function AddTweetForm(props) {
   const returnHome = () => {
     navigate("/secure/home");
   };
-
-  console.log(profileInfo);
-  console.log("picture", picture);
-  console.log("imgPreview", imgPreview);
-  console.log("text", postText);
 
   return (
     <section>
@@ -148,9 +142,6 @@ export default function AddTweetForm(props) {
           </form>
           {error && <p className="error-msg-add-post">{error}</p>}
 
-          {/* <div>
-            <img src={picture} alt="" />
-          </div> */}
           <div
             className="cameraIconDiv"
             onClick={() => {
@@ -163,7 +154,6 @@ export default function AddTweetForm(props) {
             className="unvisible"
             accept="image/*"
             ref={fileInputRef}
-            // style={{ display: "none" }}
             onChange={(e) => {
               setPicture(e.target.files[0]);
               // if (file && file.type.substring(0, 5) === "image") {

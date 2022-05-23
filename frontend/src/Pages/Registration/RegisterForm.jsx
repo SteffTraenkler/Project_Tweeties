@@ -22,10 +22,8 @@ export const RegisterForm = () => {
     if (uniqueUsername === "") {
       setValidError({ error: false, msg: "emty Field" })
     } else if (uniqueUsername.includes("@")) {
-      console.log("includes");
       setValidError({ error: false, msg: "includes @ Tag" })
     } else {
-      console.log("doesnt include");
       setValidError({ error: true, msg: "missing @ Tag" })
     }
   }, [uniqueUsername])
