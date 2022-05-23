@@ -14,9 +14,6 @@ export const Home = (props) => {
 
   const navigate = useNavigate()
 
-  const profileInfo = props.profileInfo
-
-
   useEffect(() => {
     fetch(apiBaseUrl + "/api/posts/feed", {
       headers: {
@@ -35,8 +32,6 @@ export const Home = (props) => {
   }, [interactionChange]);
 
   const createNewTweet = () => navigate("/addPost");
-
-  console.log(profileInfo);
 
   return (
     <div>
