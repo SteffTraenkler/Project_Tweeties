@@ -36,7 +36,7 @@ export default function ShowUserRTd(props) {
 
     return (
         <>{error ?
-            <h2>{error}</h2>
+            <h2 className="noUser">{error}</h2>
             : (<div>
                 <div className="backFlex">
                     <p onClick={goBackOnClick}><img className="backArrow" src={ArrowBack} alt="" /></p>

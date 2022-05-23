@@ -1,5 +1,5 @@
 import React from "react";
-import { TailSpin, Triangle } from "react-loader-spinner";
+import { Triangle } from "react-loader-spinner";
 import birdLogo from "../assets/img/Birdie.png";
 import "../App.css";
 

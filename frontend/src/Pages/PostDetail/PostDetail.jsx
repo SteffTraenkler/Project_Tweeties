@@ -4,6 +4,8 @@ import { apiBaseUrl } from "../../api/api";
 import Post from "../../Components/Post";
 import "../../styles/postDetails.css"
 import ArrowBack from "../../assets/icons/Arrow1.png";
+import postTweet from "../../assets/icons/tweet&mess/Add text icon.png";
+import { Triangle } from "react-loader-spinner";
 
 import {
     CommentInteraction,
@@ -44,7 +46,7 @@ export default function PostDetail(props) {
             });
     }, [props.token, postId, interactionChange]);
 
-
+    const createNewTweet = () => navigate("/addPost");
 
     console.log("SinglePost", post);
     return (
@@ -117,13 +119,25 @@ export default function PostDetail(props) {
             ) : (
                 <div className="pagePicLoader">
                     {" "}
-                    <img
-                        className="twitterLoadingPic"
-                        src={birdLogo}
-                        alt="birdLogo"
-                    />{" "}
+                    <div className="twitterLoading fade-out">
+                        <Triangle height="300" width="300" color="#fff" ariaLabel="Loading" />
+                        <img className="twitterLoadingPic" src={birdLogo} alt="picturePic" />
+                    </div>{" "}
                 </div>
             )}
+            <div className="posRela">
+                <div
+                    className="addTweet-btn"
+                    onClick={createNewTweet}
+                    style={{
+                        backgroundImage: `url(${postTweet})`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                    }}
+                >
+                    {/* <img className="addTweet" src={postTweet} alt="" /> */}
+                </div>
+            </div>
         </div>
     );
 }

@@ -27,6 +27,11 @@ width:60px;
 .backArrow{
   margin-left: 5vw;
 }
+.noUser{
+  margin: 0 auto;
+  width: 80vw;
+  padding-top: 20px;
+}
 .rtdFrom{
   text-align: center;
   border-bottom: 2px dashed #1da1f2;
@@ -42,10 +47,7 @@ align-items: center;
   justify-items: center;
   border-bottom: 1px solid #1da1f2;
 }
-.rtdUserInfo{
-  line-height: 5px;
 
-}
 .unfollowBtn p, .followBtn p {
   border: 1px solid #1da1f2;
   background-color: #1da1f2;

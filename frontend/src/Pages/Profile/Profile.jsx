@@ -1,9 +1,10 @@
 import PostList from "../../Components/PostList";
 import { useProfileInfo } from "../../hooks/useProfileInfo";
 import "../../styles/userDetail.css"
+import postTweet from "../../assets/icons/tweet&mess/Add text icon.png";
 
 const { useState, useEffect } = require("react");
-const { useParams, Link } = require("react-router-dom");
+const { useParams, Link, useNavigate } = require("react-router-dom");
 const { apiBaseUrl } = require("../../api/api");
 
 const Profile = (props) => {
@@ -57,6 +58,10 @@ const Profile = (props) => {
           : setInteractionChange(true)
       })
   }
+
+  const navigate = useNavigate()
+
+  const createNewTweet = () => navigate("/addPost");
 
   return (
     <div token={props.token}>
@@ -142,6 +147,17 @@ const Profile = (props) => {
       ) : (
         <h2>Loading ...</h2>
       )}
+      <div
+        className="addTweet-btn"
+        onClick={createNewTweet}
+        style={{
+          backgroundImage: `url(${postTweet})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* <img className="addTweet" src={postTweet} alt="" /> */}
+      </div>
     </div>
   );
 };

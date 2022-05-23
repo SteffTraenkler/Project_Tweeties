@@ -8,16 +8,18 @@ import { Link } from "react-router-dom"
 export const NavbarBottom = () => {
   return (
     <>
-      <div className="flex">
-        <Link to={"/secure/Home"} >
-          <img src={HomeIcon} alt="" />
-        </Link>
-        <Link to={"/secure/home/user/searchUsers"}>
-          <img src={SearchIcon} alt="" />
-        </Link>
+      <div className="puffer">
+        <div className="flex">
+          <Link to={"/secure/Home"} >
+            <img src={HomeIcon} alt="" />
+          </Link>
+          <Link to={"/secure/home/user/searchUsers"}>
+            <img src={SearchIcon} alt="" />
+          </Link>
 
-        <img src={BellIcon} alt="" />
-        <img src={MailIcon} alt="" />
+          <img src={BellIcon} alt="" />
+          <img src={MailIcon} alt="" />
+        </div>
       </div>
     </>
   )
