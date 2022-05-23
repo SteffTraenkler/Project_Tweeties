@@ -79,13 +79,13 @@ textarea:valid {
 }
 .cameraIconDiv {
   border: 1px solid #e1e8ed;
-  width: 50px;
-
+  margin: 22px 44%;
   padding: 5px;
   border-radius: 10px;
   text-align: center;
   color: grey;
 }
+
 .unvisible {
   visibility: hidden;
 }
