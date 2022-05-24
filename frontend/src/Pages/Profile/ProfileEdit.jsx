@@ -86,11 +86,11 @@ export default function EditProfile(props) {
             ) : (
                 <div>
                     <Link to={"/secure/home/user/" + profileInfo.username}>
-                        <div>
-                            <div>
+                        <div className="flexTop">
+                            <div className="divTweetProfilePic">
                                 <img src={profileInfo.profilePicture} alt={"Avatar of " + profileInfo.username} />
                             </div>
-                            <div>
+                            <div className="userName">
                                 <h2>{profileInfo.username}</h2>
                                 <p>{profileInfo.uniqueUsername}</p>
                             </div>
@@ -99,14 +99,14 @@ export default function EditProfile(props) {
                     <div className="together">
                         <div>
                             <div>
-                                <h2 onClick={returnToPreviousSide}>Cancel</h2>
+                                <div className="closePost" onClick={returnToPreviousSide}>Cancel</div>
                             </div>
                         </div>
                         <div>
-                            <h2 onClick={profilepicture || newUsername || newBio ? editProfile : null}>Speichern</h2>
+                            <p id="save" onClick={profilepicture || newUsername || newBio ? editProfile : null}>Speichern</p>
                         </div>
                     </div>
-                    <h3>Feel free to change your Profile Infromations</h3>
+                    <h4 className="profileChangeTxt">Feel free to change your Profile Infromations</h4>
                     <form>
                         <div>
                             <label htmlFor="">Username</label>
@@ -117,24 +117,30 @@ export default function EditProfile(props) {
                         <h2>Profile Picture</h2>
                         {imgPreview ? (
                             <div>
-                                <img src={imgPreview} />
-                                <div onClick={() => {
-                                    fileInputRef.current.value = null;
-                                    setProfilePicture();
-                                }}
-                                >
-                                    <div>X</div>
+                                <img className="prevPic" src={imgPreview} />
+
+                                <div className="posRel">
+                                    <div
+                                        className="delete-pic-from-post2"
+                                        onClick={() => {
+                                            fileInputRef.current.value = null;
+                                            setProfilePicture();
+                                        }}
+                                    >
+                                        <div className="x">X</div>
+                                    </div>
                                 </div>
                             </div>
                         ) : null}
                     </form>
                     {error && <p>{error}</p>}
-                    <div onClick={() => {
+                    <div className="cameraIconDiv" onClick={() => {
                         fileInputRef.current.click();
                     }}>
                         <img src={Camera} alt="Camer Icon edit Pic" />
                     </div>
                     <input
+                        className="unvisible"
                         type="file"
                         accept="image/*"
                         ref={fileInputRef}
