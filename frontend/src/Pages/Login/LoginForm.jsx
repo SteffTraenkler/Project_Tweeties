@@ -12,7 +12,8 @@ const LoginForm = (props) => {
     event.preventDefault();
 
     fetch(apiBaseUrl + "/api/users/login", {
-      method: "Post",
+      method: "POST",
+      mode: 'cors',
       headers: {
         "Content-Type": "application/json",
       },
